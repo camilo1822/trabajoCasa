@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema
+	targetNamespace="http://nequi.co/message/integration/services/UpdatePromotionRule"
+	elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://nequi.co/message/integration/services/UpdatePromotionRule">
+
+	<element name="UpdatePromotionRuleRequest" type="tns:UpdatePromotionRuleRequestType"></element>
+
+
+
+	<element name="UpdatePromotionRuleResponse"
+		type="tns:UpdatePromotionRuleResponseType">
+	</element>
+
+
+
+
+	
+
+	<complexType name="UpdatePromotionRuleRequestType">
+		<sequence>
+			<element name="id" type="string"></element>
+			<element name="description" type="string"></element>
+			<element name="fromDate" type="string"></element>
+			<element name="toDate" type="string"></element>
+			<element name="minValue" type="string"></element>
+			<element name="maxValue" type="string"></element>
+			<element name="value" type="string"></element>
+			<element name="valueType" type="string"></element>
+			<element name="accountingAccount" type="string"></element>
+			<element name="availableValue" type="string"></element>
+			<element name="ocurrence" type="string"></element>
+			<element name="status" type="string"></element>
+			<element name="notificationType" type="string"></element>
+			<element name="subject" type="string"></element>
+			<element name="message" type="string"></element>
+			<element name="maximumBudget" type="string"></element>
+			<element name="frequencyMinimum" type="string"></element>
+			<element name="frequencyRestart" type="string"></element>
+		</sequence>
+	</complexType>
+	
+    <complexType name="UpdatePromotionRuleResponseType"></complexType>
+</schema>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="SHP.ADM.WebConsole">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/.apt_generated"/>
+        <dependent-module archiveName="SHP.CMM.ServiceInterface-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/SHP.CMM.ServiceInterface/SHP.CMM.ServiceInterface">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="MDW.CMM.MessageUtil-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/MDW.CMM.MessageUtil/MDW.CMM.MessageUtil">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="SHP.ADM.ServiceController-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/SHP.ADM.ServiceController/SHP.ADM.ServiceController">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="SHP.CMM.JPAManager-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/SHP.CMM.JPAManager/SHP.CMM.JPAManager">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="SHP.CMM.LDAP-Manager-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/SHP.CMM.LDAP-Manager/SHP.CMM.LDAP-Manager">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="SHP.CMM.ServiceConsumer-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/SHP.CMM.ServiceConsumer/SHP.CMM.ServiceConsumer">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="MDW.CMM.ServiceConsumer-1.1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/MDW.CMM.ServiceConsumer/MDW.CMM.ServiceConsumer">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="SHP.ADM.MessageLibrary-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/SHP.ADM.MessageLibrary/SHP.ADM.MessageLibrary">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="context-root" value="SHP.ADM.WebConsole"/>
+        <property name="java-output-path" value="/SHP.ADM.WebConsole/target/classes"/>
+    </wb-module>
+</project-modules>

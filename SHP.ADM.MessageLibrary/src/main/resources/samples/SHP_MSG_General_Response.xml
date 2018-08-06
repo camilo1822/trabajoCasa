@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:ResponseMessageObject xmlns:tns="http://www.grupobancolombia.com/BandaDigital/services/General" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.grupobancolombia.com/BandaDigital/services/General ../resources/SHP_MSG_General.xsd ">
+  <tns:ResponseMessage>
+    <tns:ResponseHeader>
+      <tns:Channel>tns:Channel</tns:Channel>
+      <tns:ResponseDate>tns:ResponseDate</tns:ResponseDate>
+      <tns:Status>
+        <tns:StatusCode>tns:StatusCode</tns:StatusCode>
+        <tns:StatusDesc>tns:SatusDesc</tns:StatusDesc>
+      </tns:Status>
+      <tns:MessageID>tns:TransactionID</tns:MessageID>
+      <tns:ClientID>tns:ClientID</tns:ClientID>
+      <tns:Destination>
+        <tns:ServiceName>tns:ServiceName</tns:ServiceName>
+        <tns:ServiceOperation>tns:ServiceOperation</tns:ServiceOperation>
+      </tns:Destination>
+    </tns:ResponseHeader>
+    <tns:ResponseBody/>
+  </tns:ResponseMessage>
+</tns:ResponseMessageObject>

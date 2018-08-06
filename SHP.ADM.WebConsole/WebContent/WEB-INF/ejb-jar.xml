@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar xmlns="http://java.sun.com/xml/ns/javaee"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/ejb-jar_3_1.xsd" version="3.1">
+	<display-name>SHP.ADM.ServiceController</display-name>
+	<enterprise-beans>
+		<session>
+			<ejb-name>MassiveCloseAccountInitialBean</ejb-name>
+			<local-bean />
+			<ejb-class>co.bdigital.admin.bco.acs502.massivecloseaccount.MassiveCloseAccountInitialBean</ejb-class>
+			<session-type>Stateless</session-type>
+			<concurrency-management-type>
+  				Container
+  			</concurrency-management-type>
+  			<transaction-type>Container</transaction-type>
+				<resource-ref>
+					<res-ref-name>jms/SHP-CF</res-ref-name>
+					<res-type>javax.jms.QueueConnectionFactory</res-type>
+					<res-sharing-scope>Shareable</res-sharing-scope>
+					<lookup-name>jms/SHP-CF</lookup-name>
+				</resource-ref>
+				<resource-ref>
+					<res-ref-name>jms/BCO-MassiveCloseAccount.Q</res-ref-name>
+					<res-type>javax.jms.Queue</res-type>
+					<res-auth>Container</res-auth>
+					<res-sharing-scope>Shareable</res-sharing-scope>
+					<lookup-name>jms/BCO-MassiveCloseAccount.Q</lookup-name>
+				</resource-ref>
+		</session>
+	</enterprise-beans>
+</ejb-jar>

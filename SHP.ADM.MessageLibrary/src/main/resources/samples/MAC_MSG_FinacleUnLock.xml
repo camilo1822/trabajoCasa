@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:GetLockServiceRequest xmlns:tns="http://www.grupobancolombia.com/BandaDigital/services/GetLockService" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.grupobancolombia.com/BandaDigital/services/GetLockService ../resources/services/ibs/MAC_MSG_FinacleUnLock.xsd ">
+  <tns:unfreezeAccountRQ>
+    <tns:accountNumber>tns:accountNumber</tns:accountNumber>
+    <tns:reasonCode>tns:reasonCode</tns:reasonCode>
+  </tns:unfreezeAccountRQ>
+</tns:GetLockServiceRequest>

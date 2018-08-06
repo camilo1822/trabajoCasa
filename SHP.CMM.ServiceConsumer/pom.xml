@@ -1,0 +1,38 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>co.nequi</groupId>
+	<artifactId>SHP.CMM.ServiceConsumer</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<name>Archetype - SHP.CMM.ServiceConsumer</name>
+	<url>http://maven.apache.org</url>
+	<dependencies>
+		<!--DEPENDENCIAS DE LIBRERIAS COMPARTIDAS -->
+		<dependency>
+			<groupId>co.nequi</groupId>
+			<artifactId>SHP.SHL.CommonInterface</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>co.nequi</groupId>
+			<artifactId>SHP.SHL.TracerManager</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+		<!--DEPENDENCIAS DE LIBRERIAS COMUNES -->
+		<!--DEPENDENCIAS DE LIBRERIAS GENERALES -->
+		<dependency>
+			<groupId>org.apache.wink</groupId>
+			<artifactId>wink-client</artifactId>
+			<version>1.4</version>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.6.0</version>
+		</dependency>
+
+	</dependencies>
+</project>

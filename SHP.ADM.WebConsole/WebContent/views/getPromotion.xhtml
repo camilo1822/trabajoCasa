@@ -1,0 +1,568 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title></title>
+</h:head>
+
+<h:body>
+	<ui:composition template="./templateAdministrative.xhtml">
+		<ui:define name="content">
+			<p:growl id="growl" sticky="true" showDetail="true" life="1000" />
+			<p:ajaxStatus onstart="PF('statusDialog').show()"
+				onsuccess="PF('statusDialog').hide()" />
+			<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+				closable="false" resizable="false" showHeader="false">
+				<p:graphicImage name="/images/ajax-loader.gif" />
+			</p:dialog>
+			<div class="form-get-promotions outer-div-center">
+				<p:tabView id="tabUpdatePromotion"
+					styleClass="inner-div-center-promotions">
+					<p:tab title="#{msg['get.promotion.tabview.get']}"
+						rendered="#{getPromotionMGBean.permissionRol.write == 1 or getPromotionMGBean.permissionRol.write == 3}">
+						<p:outputPanel deferred="true">
+							<h:form id="formUpdatePromotion">
+								<p:wizard flowListener="#{getPromotionMGBean.onFlowProcess}"
+									nextLabel="#{msg['common.next']}"
+									backLabel="#{msg['common.back']}" onnext="showCreate()"
+									onback="showCreate()">
+									<p:tab id="obtenerDetalles"
+										title="#{msg['get.promotion.tab.get']}">
+										<p:panel header="#{msg['get.promotion.panel.get']}">
+											<p:messages />
+											<h:panelGrid columns="2" columnClasses="label, value">
+												<h:outputText styleClass="outputlabel-bold"
+													value="#{msg['get.promotion.output.text.service.promotion']}" />
+												<p:selectOneMenu value="#{getPromotionMGBean.nameService}">
+													<f:selectItem itemLabel="- #{msg['common.select']} -"
+														itemValue="" />
+													<f:selectItems
+														value="#{getPromotionMGBean.selectDescription}" />
+												</p:selectOneMenu>
+
+											</h:panelGrid>
+										</p:panel>
+									</p:tab>
+
+									<p:tab id="confirmation"
+										title="#{msg['get.promotion.tab.resultado']}">
+										<p:panel
+											header="#{msg['get.promotion.panel.resultado.title']}">
+											<p:outputPanel id="panelEditProfile" style="text-align:left;">
+												<h:form id="formGetPromotion">
+													<p:wizard id="wizardPromoUpdate"
+														flowListener="#{getPromotionMGBean.onFlowProcessUpdate}"
+														nextLabel="#{msg['common.next']}"
+														backLabel="#{msg['common.back']}" widgetVar="wizardPromo">
+														<p:tab id="getPromotion"
+															title="#{msg['edit.promotion.tab.edit']}">
+															<p:panel header="#{msg['edit.promotion.panel.edit']}">
+																<h:panelGrid columns="4">
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.descriptionBono']}"
+																		rendered="#{getPromotionMGBean.code == 2}" />
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.descriptionCashback']}"
+																		rendered="#{getPromotionMGBean.code == 1 or getPromotionMGBean.code == 3}" />
+																	<p:inputText value="#{getPromotionMGBean.description}"
+																		label="#{msg['edit.promotion.text.descriptionBono']}"
+																		required="true"
+																		rendered="#{getPromotionMGBean.code == 2}" />
+																	<p:inputText value="#{getPromotionMGBean.description}"
+																		label="#{msg['edit.promotion.text.descriptionCashback']}"
+																		required="true"
+																		rendered="#{getPromotionMGBean.code == 1 or getPromotionMGBean.code == 3}" />
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.status']}" />
+																	<p:selectOneMenu id="selectSatus"
+																		value="#{getPromotionMGBean.status}"
+																		styleClass="outputSelect">
+																		<f:selectItem itemValue="0" itemLabel="Inactivo" />
+																		<f:selectItem itemValue="1" itemLabel="Activo" />
+																	</p:selectOneMenu>
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.fromDate']}" />
+																	<p:calendar value="#{getPromotionMGBean.dateFrom}"
+																		label="#{msg['edit.promotion.text.fromDate']}"
+																		pattern="dd-MM-yyyy" mask="true" />
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.toDate']}" />
+																	<p:calendar value="#{getPromotionMGBean.dateTo}"
+																		label="#{msg['edit.promotion.text.toDate']}"
+																		pattern="dd-MM-yyyy" mask="true" />
+
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.fromHour']}" />
+																	<p:calendar value="#{getPromotionMGBean.hourFrom}"
+																		label="#{msg['edit.promotion.text.fromHour']}"
+																		pattern="HH:mm:ss" mask="true" timeOnly="true" />
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.toHour']}" />
+																	<p:calendar value="#{getPromotionMGBean.hourTo}"
+																		label="#{msg['edit.promotion.text.toHour']}"
+																		pattern="HH:mm:ss" mask="true" timeOnly="true" />
+
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.value']}" />
+																	<p:inputText value="#{getPromotionMGBean.value}"
+																		label="#{msg['edit.promotion.text.value']}"
+																		onkeypress="return justNumbers(event);"
+																		required="true" />
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.minValue']}"
+																		rendered="#{getPromotionMGBean.code == 1 or getPromotionMGBean.code == 3}" />
+																	<p:inputText value="#{getPromotionMGBean.minValue}"
+																		label="#{msg['edit.promotion.text.minValue']}"
+																		onkeypress="return justNumbers(event);"
+																		required="true"
+																		rendered="#{getPromotionMGBean.code == 1 or getPromotionMGBean.code == 3}" />
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.maxValue']}"
+																		rendered="#{getPromotionMGBean.code == 1 or getPromotionMGBean.code == 3}" />
+																	<p:inputText value="#{getPromotionMGBean.maxValue}"
+																		label="#{msg['edit.promotion.text.maxValue']}"
+																		onkeypress="return justNumbers(event);"
+																		required="true"
+																		rendered="#{getPromotionMGBean.code == 1 or getPromotionMGBean.code == 3}" />
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.valueType']}"
+																		rendered="#{getPromotionMGBean.code == 1 or getPromotionMGBean.code == 3}" />
+																	<p:selectOneMenu
+																		value="#{getPromotionMGBean.valueType}"
+																		styleClass="outputSelect"
+																		rendered="#{getPromotionMGBean.code == 1 or getPromotionMGBean.code == 3}">
+																		<f:selectItem itemValue="$" itemLabel="Monto Fijo" />
+																		<f:selectItem itemValue="%" itemLabel="Porcentaje" />
+																	</p:selectOneMenu>
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.accountingAccount']}" />
+																	<p:inputText
+																		value="#{getPromotionMGBean.accountingAccount}"
+																		label="#{msg['edit.promotion.text.accountingAccount']}"
+																		required="true" />
+
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.maximumBudget']}"
+																		rendered="#{getPromotionMGBean.code == 2}" />
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.maximumBudgetCashback']}"
+																		rendered="#{getPromotionMGBean.code == 1 or getPromotionMGBean.code == 3}" />
+																	<p:inputText id="maximumBudget"
+																		value="#{getPromotionMGBean.maximumBudget}"
+																		label="#{msg['edit.promotion.text.maximumBudget']}"
+																		onkeypress="return justNumbers(event);"
+																		required="true">
+																		<f:validator
+																			validatorId="custom.maximumBudgetValidator" />
+																	</p:inputText>
+
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.availableValue']}" />
+																	<p:inputText id="availableValue"
+																		value="#{getPromotionMGBean.availableValue}"
+																		label="#{msg['edit.promotion.text.availableValue']}"
+																		onkeypress="return justNumbers(event);"
+																		required="true" readonly="true">
+																	</p:inputText>
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.ocurrence']}"
+																		rendered="#{getPromotionMGBean.code == 2}" />
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.ocurrenceCashback']}"
+																		rendered="#{getPromotionMGBean.code == 1 or getPromotionMGBean.code == 3}" />
+																	<p:inputText value="#{getPromotionMGBean.ocurrence}"
+																		label="#{msg['edit.promotion.text.ocurrence']}"
+																		onkeypress="return justNumbers(event);"
+																		required="true" />
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.message']}" />
+																	<p:inputText value="#{getPromotionMGBean.message}"
+																		label="#{msg['edit.promotion.text.message']}"
+																		required="true" />
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.notificationType']}"
+																		rendered="#{getPromotionMGBean.code == 1 or getPromotionMGBean.code == 3}" />
+																	<p:selectOneMenu
+																		value="#{getPromotionMGBean.notificationType}"
+																		styleClass="outputSelect"
+																		rendered="#{getPromotionMGBean.code == 1 or getPromotionMGBean.code == 3}">
+																		<f:selectItem itemValue="PUSH" itemLabel="PUSH" />
+																		<f:selectItem itemValue="SMS" itemLabel="SMS" />
+																		<f:ajax render="notification" />
+																	</p:selectOneMenu>
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.subject']}"
+																		rendered="#{getPromotionMGBean.code == 1 or getPromotionMGBean.code == 3}" />
+																	<p:inputText id="notification"
+																		value="#{getPromotionMGBean.subject}"
+																		label="#{msg['edit.promotion.text.subject']}"
+																		required="true"
+																		rendered="#{getPromotionMGBean.code == 1 or getPromotionMGBean.code == 3}"
+																		disabled="#{getPromotionMGBean.notificationType == 'SMS'}" />
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.frequencyMinimum']}"
+																		rendered="#{getPromotionMGBean.code == 1 or getPromotionMGBean.code == 3}" />
+																	<p:inputText
+																		value="#{getPromotionMGBean.frequencyMinimum}"
+																		label="#{msg['edit.promotion.text.frequencyMinimum']}"
+																		rendered="#{getPromotionMGBean.code == 1 or getPromotionMGBean.code == 3}"
+																		onkeypress="return justNumbers(event);" />
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.frequencyRestart']}"
+																		rendered="#{getPromotionMGBean.code == 1 or getPromotionMGBean.code == 3}" />
+																	<p:inputText
+																		value="#{getPromotionMGBean.frequencyRestart}"
+																		label="#{msg['edit.promotion.text.frequencyRestart']}"
+																		rendered="#{getPromotionMGBean.code == 1 or getPromotionMGBean.code == 3}"
+																		onkeypress="return justNumbers(event);" />
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.resetCampaign']}" />
+																	<p:selectBooleanCheckbox id="resetCamp"
+																		value="#{getPromotionMGBean.resetCampaign}"
+																		label="#{msg['edit.promotion.text.resetCampaign']}" />
+																</h:panelGrid>
+															</p:panel>
+														</p:tab>
+														<p:tab id="confirmationUpdate"
+															title="#{msg['edit.promotion.tab.confirm']}">
+															<p:panel id="dlgPromUp"
+																header="#{msg['edit.promotion.panel.edit']}">
+																<p:messages />
+																<h:panelGrid columns="4">
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.descriptionBono']}"
+																		rendered="#{getPromotionMGBean.code == 2}" />
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.descriptionCashback']}"
+																		rendered="#{getPromotionMGBean.code == 1 or getPromotionMGBean.code == 3}" />
+																	<h:outputText value="#{getPromotionMGBean.description}" />
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.status']}" />
+																	<h:outputText value="#{getPromotionMGBean.statusTxt}" />
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.fromDate']}" />
+																	<h:outputText value="#{getPromotionMGBean.fromDate}" />
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.toDate']}" />
+																	<h:outputText value="#{getPromotionMGBean.toDate}" />
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.fromHour']}" />
+																	<h:outputText value="#{getPromotionMGBean.fromHour}" />
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.toHour']}" />
+																	<h:outputText value="#{getPromotionMGBean.toHour}" />
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.value']}" />
+																	<h:outputText value="#{getPromotionMGBean.value}" />
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.minValue']}"
+																		rendered="#{getPromotionMGBean.code == 1 or getPromotionMGBean.code == 3}" />
+																	<h:outputText value="#{getPromotionMGBean.minValue}"
+																		rendered="#{getPromotionMGBean.code == 1 or getPromotionMGBean.code == 3}" />
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.maxValue']}"
+																		rendered="#{getPromotionMGBean.code == 1 or getPromotionMGBean.code == 3}" />
+																	<h:outputText value="#{getPromotionMGBean.maxValue}"
+																		rendered="#{getPromotionMGBean.code == 1 or getPromotionMGBean.code == 3}" />
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.valueType']}"
+																		rendered="#{getPromotionMGBean.code == 1 or getPromotionMGBean.code == 3}" />
+																	<h:outputText value="#{getPromotionMGBean.valueType}"
+																		rendered="#{getPromotionMGBean.code == 1 or getPromotionMGBean.code == 3}" />
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.accountingAccount']}" />
+																	<h:outputText
+																		value="#{getPromotionMGBean.accountingAccount}" />
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.maximumBudget']}"
+																		rendered="#{getPromotionMGBean.code == 2}" />
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.maximumBudgetCashback']}"
+																		rendered="#{getPromotionMGBean.code == 1 or getPromotionMGBean.code == 3}" />
+																	<h:outputText
+																		value="#{getPromotionMGBean.maximumBudget}">
+																	</h:outputText>
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.availableValue']}" />
+																	<h:outputText
+																		value="#{getPromotionMGBean.availableValueAfterModify}">
+																	</h:outputText>
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.ocurrence']}"
+																		rendered="#{getPromotionMGBean.code == 2}" />
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.ocurrenceCashback']}"
+																		rendered="#{getPromotionMGBean.code == 1 or getPromotionMGBean.code == 3}" />
+																	<h:outputText value="#{getPromotionMGBean.ocurrence}" />
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.message']}" />
+																	<h:outputText value="#{getPromotionMGBean.message}" />
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.notificationType']}"
+																		rendered="#{getPromotionMGBean.code == 1 or getPromotionMGBean.code == 3}" />
+																	<h:outputText
+																		value="#{getPromotionMGBean.notificationType}"
+																		rendered="#{getPromotionMGBean.code == 1 or getPromotionMGBean.code == 3}" />
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.subject']}"
+																		rendered="#{getPromotionMGBean.code == 1 or getPromotionMGBean.code == 3}" />
+																	<h:outputText value="#{getPromotionMGBean.subject}"
+																		rendered="#{getPromotionMGBean.code == 1 or getPromotionMGBean.code == 3}" />
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.frequencyMinimum']}"
+																		rendered="#{getPromotionMGBean.code == 1 or getPromotionMGBean.code == 3}" />
+																	<h:outputText
+																		value="#{getPromotionMGBean.frequencyMinimum}"
+																		rendered="#{getPromotionMGBean.code == 1 or getPromotionMGBean.code == 3}" />
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.frequencyRestart']}"
+																		rendered="#{getPromotionMGBean.code == 1 or getPromotionMGBean.code == 3}" />
+																	<h:outputText
+																		value="#{getPromotionMGBean.frequencyRestart}"
+																		rendered="#{getPromotionMGBean.code == 1 or getPromotionMGBean.code == 3}" />
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.amountToDeliver']}" />
+																	<h:outputText
+																		value="#{getPromotionMGBean.amountToDeliver}">
+																	</h:outputText>
+
+																	<h:outputText styleClass="outputlabel-bold"
+																		value="#{msg['edit.promotion.text.resetCampaign']}" />
+																	<h:selectBooleanCheckbox
+																		value="#{getPromotionMGBean.resetCampaign}"
+																		readonly="true" disabled="true" />
+
+																</h:panelGrid>
+																<div style="text-align: end;">
+																	<p:commandButton
+																		oncomplete="PF('updateDialog').hide(); PF('wizardPromo').loadStep('getPromotion', false);"
+																		value="#{msg['edit.promotion.panel.confirm.button.update']}"
+																		actionListener="#{getPromotionMGBean.savePromotion}"
+																		update=":tabUpdatePromotion:formUpdatePromotion, :growl"
+																		style="margin-top: 4%;" process="@this" />
+																</div>
+															</p:panel>
+														</p:tab>
+													</p:wizard>
+												</h:form>
+											</p:outputPanel>
+											<br></br>
+											<br></br>
+											<h:form id="formPromo" enctype="multipart/form-data">
+												<p:growl id="growl" sticky="true" showDetail="true"
+													life="1000" />
+												<p:panel id="basic"
+													header="#{msg['get.promotion.tabview.upload']}">
+													<h:panelGrid columns="1" width="100%" cellpadding="2"
+														rendered="#{getPromotionMGBean.permissionRol.write == 1}">
+														<h:outputLabel value="#{msg['control.list.upload.title']}"
+															style="font-weight:bold" />
+														<p:fileUpload value="#{getPromotionMGBean.file2}"
+															process="@this"
+															fileUploadListener="#{getPromotionMGBean.loadData}"
+															label="#{msg['common.select.action']}"
+															uploadLabel="#{msg['common.upload']}"
+															cancelLabel="#{msg['common.form.button.cancel']}"
+															oncomplete="if (#{getPromotionMGBean.processResultsSize > 0}) { PF('processResultsDialog').show(); }"
+															mode="advanced" dragDropSupport="false"
+															allowTypes="/(\.|\/)(csv)$/"
+															update=":tabUpdatePromotion:formUpdatePromotion:usuariosTotales,:tabUpdatePromotion:formUpdatePromotion:formListUser, :tabUpdatePromotion:formUpdatePromotion:processResultsTable, :growl, @this" />
+													</h:panelGrid>
+												</p:panel>
+											</h:form>
+											<p:commandButton id="btnDeleteFile"
+												icon="fa fa-fw fa-trash-o"
+												update=":tabUpdatePromotion:formUpdatePromotion:usuariosTotales,:tabUpdatePromotion:formUpdatePromotion:formListUser, :growl"
+												title="#{msg['get.promotion.button.delete']}"
+												value="#{msg['get.promotion.button.delete']}"
+												actionListener="#{getPromotionMGBean.deletePromotions()}" />
+											<h:outputText styleClass="outputlabel-bold"
+												value="#{msg['get.promotion.output.text.users.number']}" />
+											<h:outputText id="usuariosTotales"
+												value="#{getPromotionMGBean.usersSize}">
+											</h:outputText>
+											<br></br>
+											<br></br>
+											<h:form id="formListUser">
+												<div class="div-data-table-list-user">
+													<p:dataTable id="usersDataTable" var="user"
+														value="#{getPromotionMGBean.listUsers}" paginator="true"
+														rows="10" paginatorPosition="bottom" widgetVar="userTable"
+														paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+														<f:facet name="header">
+															<h:outputText value="#{msg['get.promotion.list.user']}" />
+														</f:facet>
+														<p:column headerText="#{msg['get.promotion.user.id']}">
+															<h:outputText value="#{user.identificacion}" />
+														</p:column>
+														<p:column headerText="#{msg['get.promotion.user.type']}">
+															<h:outputText value="#{user.tipoIdentificacion}" />
+														</p:column>
+														<p:column headerText="#{msg['get.promotion.user.phone']}">
+															<h:outputText value="#{user.celular}" />
+														</p:column>
+													</p:dataTable>
+												</div>
+											</h:form>
+											<br></br>
+											<br></br>
+											<h:form id="formPromoComerce" enctype="multipart/form-data">
+												<p:growl id="growl" sticky="true" showDetail="true"
+													life="1000" />
+												<p:panel id="basic"
+													header="#{msg['get.promotion.tabview.comercios']}">
+													<h:panelGrid columns="1" width="100%" cellpadding="2"
+														rendered="#{getPromotionMGBean.permissionRol.write == 1}">
+														<h:outputLabel value="#{msg['control.list.upload.title']}"
+															style="font-weight:bold" />
+														<p:fileUpload value="#{getPromotionMGBean.file2}"
+															process="@this"
+															fileUploadListener="#{getPromotionMGBean.loadDataComerce}"
+															label="#{msg['common.select.action']}"
+															uploadLabel="#{msg['common.upload']}"
+															cancelLabel="#{msg['common.form.button.cancel']}"
+															oncomplete="if (#{getPromotionMGBean.processResultsSize > 0}) { PF('processResultsDialog').show(); }"
+															mode="advanced" dragDropSupport="false"
+															allowTypes="/(\.|\/)(csv)$/"
+															update=":tabUpdatePromotion:formUpdatePromotion:formListComerce, :tabUpdatePromotion:formUpdatePromotion:processResultsTable, :growl, @this" />
+													</h:panelGrid>
+												</p:panel>
+											</h:form>
+											<p:commandButton id="btnDeleteFileComerce"
+												icon="fa fa-fw fa-trash-o"
+												update=":tabUpdatePromotion:formUpdatePromotion:formListComerce, :growl"
+												title="#{msg['get.promotion.button.delete.comerce']}"
+												value="#{msg['get.promotion.button.delete.comerce']}"
+												actionListener="#{getPromotionMGBean.deleteComerce()}" />
+											<br></br>
+											<br></br>
+											<h:form id="formListComerce">
+												<div class="div-data-table-list-user">
+													<p:dataTable id="comerceDataTable" var="comerce"
+														value="#{getPromotionMGBean.listComerce}" paginator="true"
+														rows="10" paginatorPosition="bottom"
+														widgetVar="comerceTable"
+														paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+														<f:facet name="header">
+															<h:outputText
+																value="#{msg['get.promotion.list.comerce']}" />
+														</f:facet>
+														<p:column headerText="#{msg['get.promotion.comerce']}">
+															<h:outputText value="#{comerce.id.comercioId}" />
+														</p:column>
+														<p:column headerText="#{msg['get.promotion.terminal']}">
+															<h:outputText value="#{comerce.id.terminalId}" />
+														</p:column>
+														<p:column headerText="#{msg['get.promotion.status']}">
+															<h:outputText value="#{comerce.estado}" />
+														</p:column>
+													</p:dataTable>
+												</div>
+											</h:form>
+											<p:dialog header="#{msg['edit.promotion.dialog.title']}"
+												widgetVar="updateDialog" modal="true" showEffect="blind"
+												hideEffect="explode" resizable="false"
+												onHide="PF('wizardPromo').loadStep('getPromotion', false);">
+											</p:dialog>
+											<p:dialog
+												header="#{msg['get.promotion.panel.processresult.title']}"
+												widgetVar="processResultsDialog" modal="true"
+												showEffect="blind" hideEffect="explode" resizable="false">
+												<p:outputPanel id="panelProcessResults"
+													styleClass="data-table-user-edit"
+													style="text-align:left; max-width: 550px;">
+													<p:dataTable id="processResultsTable" var="result"
+														value="#{getPromotionMGBean.processResults}"
+														editable="false" paginator="true" rows="5"
+														paginatorPosition="bottom">
+														<f:facet name="header">
+															<h:outputText
+																value="#{msg['get.promotion.processresult.list.header']}"
+																style="text-align:center;" />
+														</f:facet>
+														<p:column
+															headerText="#{msg['get.promotion.processresult.list.id']}"
+															style="text-align:center; width: 105px;">
+															<h:outputText value="#{result.id}" />
+														</p:column>
+
+														<p:column
+															headerText="#{msg['get.promotion.processresult.list.description']}"
+															style="text-align:center;">
+															<h:outputText value="#{result.description}" />
+														</p:column>
+													</p:dataTable>
+												</p:outputPanel>
+											</p:dialog>
+										</p:panel>
+									</p:tab>
+								</p:wizard>
+							</h:form>
+						</p:outputPanel>
+
+						<br></br>
+						<br></br>
+						<h:form id="formCreateRule">
+							<p:panel header="#{msg['get.promotion.panel.create']}"
+								styleClass="inner-div-center-promotions">
+								<h:outputText styleClass="outputlabel-bold"
+									value="#{msg['get.promotion.output.text.service.resarcimiento.name']}" />
+								<p:inputText id="resarcimientoText"
+									value="#{getPromotionMGBean.restitutionName}"
+									label="#{msg['get.promotion.output.text.service.resarcimiento.name']}" />
+								<p:commandButton id="btnCreateRule"
+									update=":tabUpdatePromotion:formConfirmCreate:resarciName"
+									onclick="PF('dialogCloseAccount').show()" icon="ui-icon-check"
+									title="#{msg['get.promotion.button.create']}"
+									value="#{msg['get.promotion.button.create']}" />
+							</p:panel>
+						</h:form>
+
+						<h:form id="formConfirmCreate">
+							<p:growl id="growl" sticky="true" showDetail="true" life="1000" />
+							<p:confirmDialog id="confirmDialog" showEffect="fade"
+								hideEffect="explode"
+								message="#{msg['get.promotion.confirmation.message'.concat(getPromotionMGBean.restitutionName)]}"
+								header="#{msg['common.nequi.close.account.confirmation.title']}"
+								severity="alert" widgetVar="dialogCloseAccount">
+								<h:outputText id="resarciName"
+									value="#{getPromotionMGBean.restitutionName}" escape="false"
+									styleClass="outputResarcimiento" />
+								<p:commandButton id="confirm" value="Aceptar" update="growl"
+									icon="ui-icon-check"
+									oncomplete="PF('dialogCloseAccount').hide(); rechargePage();"
+									actionListener="#{getPromotionMGBean.createPromotionRule()}" />
+								<p:commandButton id="decline" value="Cancelar" type="button"
+									icon="ui-icon-close" onclick="PF('dialogCloseAccount').hide()" />
+							</p:confirmDialog>
+						</h:form>
+						<script type="text/javascript">
+							function rechargePage() {
+								location.href = window.location.href;
+							}
+							function showCreate() {
+								var formUpdate = document
+										.getElementById("tabUpdatePromotion:formUpdatePromotion:formPromo");
+
+								var formCreateRule = document
+										.getElementById("tabUpdatePromotion:formCreateRule");
+
+								if (null != formUpdate) {
+									formCreateRule.style.display = "block";
+								} else {
+									formCreateRule.style.display = "none";
+								}
+							}
+						</script>
+					</p:tab>
+				</p:tabView>
+			</div>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

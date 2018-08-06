@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.grupobancolombia.com/BandaDigital/services/General"
+	elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.grupobancolombia.com/BandaDigital/services/General">
+
+	<element name="ResponseHeader">
+		<complexType>
+			<complexContent>
+				<extension base="tns:ResponseHeaderObjectType"></extension>
+			</complexContent>
+		</complexType>
+	</element>
+
+
+	<element name="RequestHeader">
+		<complexType>
+			<complexContent>
+				<extension base="tns:RequestHeaderObjectType"></extension>
+			</complexContent>
+		</complexType>
+	</element>
+
+	<element name="RequestHeaderObject" type="tns:RequestHeaderObjectType"></element>
+
+	<complexType name="RequestHeaderObjectType">
+		<sequence>
+			<element name="Channel" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="RequestDate" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="MessageID" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="ClientID" type="string" minOccurs="0"
+				maxOccurs="1">
+			</element>
+			<element name="Destination" type="tns:DestinationType"
+				minOccurs="1" maxOccurs="1">
+			</element>
+
+
+
+
+			<element name="Security" type="tns:SecurityType"
+				minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="Address" type="tns:AddressType" minOccurs="0"
+				maxOccurs="1">
+			</element>
+			<element name="MaintenanceMode" type="string" maxOccurs="1"
+				minOccurs="0">
+			</element>
+			<element name="MaintenanceModeMessage" type="string"
+				maxOccurs="1" minOccurs="0">
+			</element>
+			<element name="BlockingNequiAccessMode" type="string"
+				maxOccurs="1" minOccurs="0">
+			</element>
+			<element name="BlockingNequiAccessModeMessage" type="string" maxOccurs="1" minOccurs="0"></element>
+		</sequence>
+	</complexType>
+
+
+	<element name="ResponseHeaderObject" type="tns:ResponseHeaderObjectType"></element>
+
+	<complexType name="ResponseHeaderObjectType">
+		<sequence>
+			<element name="Channel" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="ResponseDate" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="Status" type="tns:StatusType" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="MessageID" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="ClientID" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="Destination" type="tns:DestinationType"
+				minOccurs="1" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="StatusType">
+		<sequence>
+			<element name="StatusCode" type="string" minOccurs="1"
+				maxOccurs="1"></element>
+			<element name="StatusDesc" type="string" minOccurs="1"
+				maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+
+
+
+	<element name="ResponseBodyObject" type="tns:ResponseBodyObjectType"></element>
+
+	<complexType name="ResponseBodyObjectType">
+		<sequence>
+			<any minOccurs="0" />
+		</sequence>
+	</complexType>
+
+
+	<element name="RequestBodyObject" type="tns:RequestBodyObjectType"></element>
+
+	<complexType name="RequestBodyObjectType">
+		<sequence>
+			<any minOccurs="0" />
+		</sequence>
+	</complexType>
+
+	<element name="RequestMessageObject" type="tns:RequestMessageObjectType"></element>
+
+	<complexType name="RequestMessageObjectType">
+		<sequence>
+			<element name="RequestMessage" type="tns:RequestMessageType"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="RequestMessageType">
+		<sequence>
+			<element ref="tns:RequestHeader"></element>
+			<element ref="tns:RequestBody"></element>
+		</sequence>
+	</complexType>
+
+	<element name="ResponseMessageObject" type="tns:ResponseMessageObjectType"></element>
+
+	<complexType name="ResponseMessageObjectType">
+		<sequence>
+			<element name="ResponseMessage" type="tns:ResponseMessageType"></element>
+		</sequence>
+	</complexType>
+
+	<element name="ResponseBody">
+		<complexType>
+			<complexContent>
+				<extension base="tns:ResponseBodyObjectType"></extension>
+			</complexContent>
+		</complexType>
+	</element>
+
+	<element name="RequestBody">
+		<complexType>
+			<complexContent>
+				<extension base="tns:RequestBodyObjectType"></extension>
+			</complexContent>
+		</complexType>
+	</element>
+
+
+	<complexType name="ResponseMessageType">
+		<sequence>
+			<element ref="tns:ResponseHeader"></element>
+			<element ref="tns:ResponseBody"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="DestinationType">
+		<sequence>
+			<element name="ServiceName" type="string" minOccurs="0"
+				maxOccurs="1">
+			</element>
+			<element name="ServiceOperation" type="string" minOccurs="0"
+				maxOccurs="1">
+			</element>
+
+
+			<element name="ServiceRegion" type="string" minOccurs="0" maxOccurs="1"></element>
+			<element name="ServiceVersion" type="string" minOccurs="0" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="SecurityType">
+		<sequence>
+			<element name="PublicKey" type="string" minOccurs="0"
+				maxOccurs="1">
+			</element>
+			<element name="PrimeModulus" type="string" minOccurs="0"
+				maxOccurs="1">
+			</element>
+			<element name="BaseGenerator" type="string" minOccurs="0"
+				maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="AddressType">
+		<sequence>
+			<element name="DeviceAddress" type="string" minOccurs="1"
+				maxOccurs="1"></element>
+			<element name="NetworkAddress" type="string" minOccurs="0"
+				maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+</schema>

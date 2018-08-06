@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema
+	targetNamespace="http://www.grupobancolombia.com/BandaDigital/services/GetBankCertificateServices"
+	elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.grupobancolombia.com/BandaDigital/services/GetBankCertificateServices">
+
+	<element name="GetBankCertificateServiceRequest" type="tns:GetBankCertificateServiceRequestType"></element>
+
+	<complexType name="GetBankCertificateServiceRequestType">
+		<sequence>
+			<element name="getBankCertificateRQ" type="tns:GetBankCertificateRQType"></element>
+		</sequence>
+	</complexType>
+	<complexType name="GetBankCertificateRQType">
+		<sequence>
+			<element name="phoneNumber" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+</schema>

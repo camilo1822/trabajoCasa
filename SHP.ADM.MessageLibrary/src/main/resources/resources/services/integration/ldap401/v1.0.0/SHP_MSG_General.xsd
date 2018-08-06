@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://nequi.co/message/integration/services/"
+	elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://nequi.co/message/integration/services/" xmlns:pref="http://nequi.co/message/integration/services/UpdateUserLDAPServices" xmlns:pref1="http://nequi.co/message/integration/services/DeleteUserLDAPServices" xmlns:pref2="http://nequi.co/message/integration/services/CreateUserLDAPServices">
+
+    <import schemaLocation="IS_MSG_UpdateUserLDAPServices.xsd" namespace="http://nequi.co/message/integration/services/UpdateUserLDAPServices"></import>
+    <import schemaLocation="IS_MSG_DeleteUserLDAPServices.xsd" namespace="http://nequi.co/message/integration/services/DeleteUserLDAPServices"></import>
+    <import schemaLocation="IS_MSG_CreateUserLDAPServices.xsd" namespace="http://nequi.co/message/integration/services/CreateUserLDAPServices"></import>
+
+
+
+	<element name="RequestHeaderObject" type="tns:RequestHeaderObjectType"></element>
+
+	<complexType name="RequestHeaderObjectType">
+		<sequence>
+			<element name="channel" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="requestDateTime" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="messageId" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="clientID" type="string" minOccurs="0"
+				maxOccurs="1">
+			</element>
+			<element name="destination" type="tns:DestinationType"
+				minOccurs="1" maxOccurs="1">
+			</element>
+
+
+
+
+			<element name="address" type="tns:AddressType" minOccurs="0"
+				maxOccurs="1">
+			</element>
+			<element name="maintenanceMode" type="string" maxOccurs="1"
+				minOccurs="0">
+			</element>
+			<element name="maintenanceModeMessage" type="string"
+				maxOccurs="1" minOccurs="0">
+			</element>
+			<element name="blockingNequiAccessMode" type="string"
+				maxOccurs="1" minOccurs="0">
+			</element>
+			<element name="blockingNequiAccessModeMessage" type="string"
+				maxOccurs="1" minOccurs="0">
+			</element>
+			<element name="consumer" type="tns:ConsumerType"
+				minOccurs="1" maxOccurs="1">
+			</element>
+			<element name="messageContext" type="tns:MessageContextType" minOccurs="0" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+
+	<element name="ResponseHeaderObject" type="tns:ResponseHeaderObjectType"></element>
+
+	<complexType name="ResponseHeaderObjectType">
+		<sequence>
+			<element name="channel" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="responseDate" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="status" type="tns:StatusType" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="messageId" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="clientID" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="provider" type="tns:ProviderType"
+				minOccurs="1" maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="StatusType">
+		<sequence>
+			<element name="code" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="description" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="system" type="string" minOccurs="0" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+
+
+
+	<element name="ResponseBodyObject" type="tns:ResponseBodyObjectType"></element>
+
+	<complexType name="ResponseBodyObjectType">
+
+		<choice>
+			<element ref="pref:UpdateUserLDAPServiceResponse">
+			</element>
+			<element ref="pref1:DeleteUserLDAPServiceResponse"></element>
+
+			<element ref="pref2:CreateUserLDAPServiceResponse"></element>
+		</choice>
+	</complexType>
+
+
+	<element name="RequestBodyObject" type="tns:RequestBodyObjectType"></element>
+
+	<complexType name="RequestBodyObjectType">
+
+		<choice>
+			<element ref="pref:UpdateUserLDAPServiceRequest"></element>
+
+			<element ref="pref1:DeleteUserLDAPServiceRequest"></element>
+			<element ref="pref2:CreateUserLDAPServiceRequest"></element>
+		</choice>
+	</complexType>
+
+	<element name="integrationRQ" type="tns:RequestMessageObjectType"></element>
+
+	<complexType name="RequestMessageObjectType">
+		<sequence>
+			<element name="integrationRequest" type="tns:RequestMessageType"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="RequestMessageType">
+		<sequence>
+
+
+
+
+			<element name="header" type="tns:RequestHeaderObjectType"></element>
+			<element name="body" type="tns:RequestBodyObjectType"></element>
+		</sequence>
+	</complexType>
+
+	<element name="integrationRS" type="tns:ResponseMessageObjectType"></element>
+
+	<complexType name="ResponseMessageObjectType">
+		<sequence>
+			<element name="integrationResponse" type="tns:ResponseMessageType"></element>
+		</sequence>
+	</complexType>
+
+
+
+
+	<complexType name="ResponseMessageType">
+		<sequence>
+
+
+			<element name="header" type="tns:ResponseHeaderObjectType"></element>
+			<element name="body" type="tns:ResponseBodyObjectType"></element>
+
+		</sequence>
+	</complexType>
+
+
+	<complexType name="SecurityType">
+		<sequence>
+			<element name="publicKey" type="string" minOccurs="0"
+				maxOccurs="1">
+			</element>
+			<element name="primeModulus" type="string" minOccurs="0"
+				maxOccurs="1">
+			</element>
+			<element name="baseGenerator" type="string" minOccurs="0"
+				maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="AddressType">
+		<sequence>
+			<element name="deviceAddress" type="string" minOccurs="1"
+				maxOccurs="1"></element>
+			<element name="networkAddress" type="string" minOccurs="0"
+				maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="ConsumerType">
+		<sequence>
+			<element name="id" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="description" type="string" minOccurs="0"
+				maxOccurs="1">
+			</element>
+			<element name="deviceInfo" type="tns:DeviceInfoType" minOccurs="0" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="DeviceInfoType">
+		<sequence>
+			<element name="id" type="string">
+			</element>
+			<element name="type" type="string">
+			</element>
+			<element name="data" type="string"></element>
+		</sequence>
+	</complexType>
+
+
+
+	<complexType name="MessageContextType">
+		<sequence>
+			<element name="property" type="tns:PropertyType" minOccurs="1" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+
+	<complexType name="ServiceType">
+		<sequence>
+			<element name="name" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="operation" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="version" type="string" minOccurs="1" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="ContainerType">
+		<sequence>
+			<element name="id" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="name" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="type" type="string" minOccurs="1" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="ProviderType">
+		<sequence>
+			<element name="id" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="name" type="string" minOccurs="1" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="DestinationType">
+		<sequence>
+			<element name="service" type="tns:ServiceType" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="region" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="container" type="tns:ContainerType" minOccurs="1" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="PropertyType">
+		<sequence>
+			<element name="key" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="value" type="string" minOccurs="1" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+</schema>

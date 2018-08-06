@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://nequi.co/message/integration/services/amazon"
+	elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://nequi.co/message/integration/services/amazon">
+
+	<element name="getFileRequest" type="tns:GetFileRequestType"></element>
+
+	<complexType name="GetFileRequestType">
+		<sequence>
+			<element name="fileKey" type="string"></element>
+			<element name="bucket" type="string"></element>
+		</sequence>
+	</complexType>
+
+	<element name="getFileResponse" type="tns:GetFileResponseType"></element>
+
+	<complexType name="GetFileResponseType">
+		<sequence>
+			<element name="fileBase64" type="string"></element>
+    	</sequence>
+	</complexType>
+
+    
+</schema>

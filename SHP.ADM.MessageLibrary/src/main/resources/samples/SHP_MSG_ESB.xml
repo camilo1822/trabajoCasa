@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:responseHeaderOutMessage xmlns:tns="http://www.grupobancolombia.com/BandaDigital/services/SHP_MSG_ESB" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.grupobancolombia.com/BandaDigital/services/SHP_MSG_ESB ../resources/SHP_MSG_ESB.xsd ">
+  <tns:responseHeaderOut>
+    <tns:Header>
+      <tns:systemId>tns:systemId</tns:systemId>
+      <tns:messageId>tns:messageId</tns:messageId>
+      <tns:invokerDateTime>tns:invokerDateTime</tns:invokerDateTime>
+      
+      <tns:destination>
+        <tns:name>tns:name</tns:name>
+        <tns:namespace>tns:namespace</tns:namespace>
+        <tns:operation>tns:operation</tns:operation>
+      </tns:destination>
+      <tns:responseStatus>
+        <tns:statusDesc>tns:statusDesc</tns:statusDesc>
+        <tns:statusCode>tns:statusCode</tns:statusCode>
+        
+        <tns:errorMessage></tns:errorMessage>
+        <tns:system></tns:system>
+      </tns:responseStatus>
+    </tns:Header>
+    <tns:Body/>
+  </tns:responseHeaderOut>
+</tns:responseHeaderOutMessage>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:p="http://primefaces.org/ui">
+ 
+<ui:composition>
+   <h:form>	
+		<!-- If idle 10 seconds, run 'idleDialog' -->
+		<p:idleMonitor timeout="3606000" onidle="PF('idleDialog').show()" />
+	
+		<p:confirmDialog id="confirmDialog" width="400"
+			message="#{msg['dialog.inactiviry.sesion.body']}"
+			header="#{msg['dialog.inactiviry.sesion.title']}" severity="alert" widgetVar="idleDialog">
+	
+			<p:commandLink id="ajax" actionListener="#{loginMGBean.logout}">
+                <h:outputText value="#{msg['dialog.inactiviry.sesion.button']}"/>
+            </p:commandLink>
+	
+		</p:confirmDialog>
+	  </h:form>
+</ui:composition>
+</html>

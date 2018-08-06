@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title></title>
+</h:head>
+
+<h:body>
+    <ui:composition template="./templateAdministrative.xhtml">
+            <ui:define name="content">
+            	<p:growl id="growl" sticky="true" showDetail="true" life="1000" />
+            	<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+            	<p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+				    <p:graphicImage name="/images/ajax-loader.gif" />
+				</p:dialog>
+        		<div class="div-search-user" style="margin-left: 30%;">
+                     <p:panel id="basic" header="#{msg['common.search']}">
+                     <h:form id="formSearch">
+                         <h:panelGrid columns="2" cellpadding="2">
+                             <h:outputLabel for="documentNumber" value="#{msg['control.list.form.document']}" style="font-weight:bold"/>
+                             <p:inputText id="documentNumber" label="Numero Documento" value="#{controlListMGBean.numberDocument}" onkeypress="return justNumbers(event);" required="true"/>
+                             
+                             <h:outputText value="#{msg['change.info.form.type.id']}" style="font-weight:bold"/>
+	                         <p:selectOneMenu  label="Tipo Documento" value="#{controlListMGBean.documentType}" style="width: 85%;" required="true">
+	                             <f:selectItem itemLabel="- #{msg['common.select']} -" itemValue="" />
+	                             <f:selectItems value="#{controlListMGBean.selectOneItemTypeId}" />
+	                         </p:selectOneMenu>
+	                         
+	                          <h:outputLabel for="names" value="#{msg['control.list.form.names']}" style="font-weight:bold"/>
+                             <p:inputText id="names" label="names" value="#{controlListMGBean.names}"/>
+                             
+                              <h:outputLabel for="lastNames" value="#{msg['control.list.form.lastNames']}" style="font-weight:bold"/>
+                             <p:inputText id="lastNames" label="lastNames" value="#{controlListMGBean.lastNames}"/>
+                             <f:facet name="footer">
+                                  <p:commandButton rendered="#{controlListMGBean.permissionRol.read == 1}" id="btnSearchDocument" update="growl,:formDataControlList:listTable" icon="fa fa-fw fa-search" title="#{msg['common.search']}" value="#{msg['common.search']}" actionListener="#{controlListMGBean.validateOnlyOneCustomer()}"/>
+                             </f:facet>
+                             
+                         </h:panelGrid>
+                       </h:form>
+                       <p:separator/>
+                       <h:form id="formUploadList" >
+                         <h:panelGrid columns="1" width="100%">
+                         	<h:outputLabel for="lastNames" value="#{msg['control.list.upload.title']}" style="font-weight:bold"/>
+                         	<p:fileUpload  fileUploadListener="#{controlListMGBean.loadData}" label="#{msg['common.select.action']}" uploadLabel="#{msg['common.upload']}" cancelLabel="#{msg['common.form.button.cancel']}" 
+                         	mode="advanced" dragDropSupport="flase" sizeLimit="100000" fileLimit="20" allowTypes="/(\.|\/)(csv)$/" update="growl"/>
+                         	<p:commandButton rendered="#{controlListMGBean.permissionRol.read == 1}" id="btnValidateList" update="growl,:formDataControlList:listTable" icon="fa fa-fw fa-check-circle-o" title="#{msg['common.search']}" value="Validar Lista" actionListener="#{controlListMGBean.validateListCustomer()}"/>
+                         </h:panelGrid> 
+                        </h:form>
+                       </p:panel>
+                 </div>
+        		<h:form id="formDataControlList" class="data-table-user-edit">
+			    <p:dataTable id="listTable" var="list" value="#{controlListMGBean.listCustomerType}" editable="true" style="margin-bottom:20px"
+			                 paginator="true" rows="15" paginatorPosition="bottom">
+			       <f:facet name="header">
+			            <h:outputText value="#{msg['control.list.table.title']}" style="text-align:center;"/>
+			       </f:facet>
+			 
+			       <p:column headerText="#{msg['control.list.table.type']}" width="6%" style="text-align:center;">
+			               <h:outputText value="#{list.typeId}"/>
+			       </p:column>
+			 
+			       <p:column headerText="#{msg['control.list.table.document']}" style="text-align:center;">
+			               <h:outputText value="#{list.idNumber}"/>
+			       </p:column>
+			       
+			       <p:column headerText="#{msg['common.names']}" style="text-align:center;">
+			               <h:outputText value="#{list.names}"/>
+			       </p:column>
+			       
+			       <p:column headerText="#{msg['common.last.names']}" style="text-align:center;">
+			               <h:outputText value="#{list.lastNames}"/>
+			       </p:column>
+			       
+			       <p:column headerText="#{msg['common.status']}" width="8%" style="text-align:center;">
+			               <h:outputText value="#{list.statusCode}"/>
+			       </p:column>
+			       
+			       <p:column headerText="#{msg['common.description']}" style="text-align:center;">
+			               <h:outputText value="#{list.description}"/>
+			       </p:column>
+			   </p:dataTable>
+			   </h:form> 
+			 <h:form>
+			 	<div class="botonExport" style="margin-top: -16px;margin-bottom: 5px;text-align: right;margin-right: 4%;">
+                  <p:commandButton rendered="#{controlListMGBean.permissionRol.read == 1}" id="buttonExporPdf" ajax="false" icon="icon-exportPDF" style="width: 32px;height: 34px" update="growl">
+                      <p:dataExporter type="pdf" target="formDataControlList:listTable" fileName="pdf"
+                                      preProcessor="#{controlListMGBean.preProcessPDF}"/>                                            
+                  </p:commandButton>
+                  <p:tooltip id="toolTipExportPdf" for="buttonExporPdf" value="#{msg['control.list.expor.pdf']}" />
+                </div> 
+			 </h:form> 
+            </ui:define>
+     </ui:composition>
+</h:body>
+</html>

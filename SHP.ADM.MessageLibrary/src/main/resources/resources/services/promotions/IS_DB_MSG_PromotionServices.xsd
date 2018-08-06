@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://nequi.co/message/integration/services/"
+	elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:agw="http://nequi.co/message/integration/services/"
+	xmlns:Q1="http://nequi.co/message/integration/services/reporting"
+	xmlns:Q2="http://nequi.co/message/integration/services/GetPromotionDetail"
+	xmlns:Q3="http://nequi.co/message/integration/services/AddPromotionAudit"
+	xmlns:Q4="http://nequi.co/message/integration/services/UpdatePromotionRule"
+	xmlns:Q5="http://nequi.co/message/integration/services/GetRulesDescription">
+
+	<import schemaLocation="UpdatePromotionRule.xsd"
+		namespace="http://nequi.co/message/integration/services/UpdatePromotionRule">
+	</import>
+	<import schemaLocation="GetPromotionDetail.xsd"
+		namespace="http://nequi.co/message/integration/services/GetPromotionDetail">
+	</import>
+	<import schemaLocation="AddPromotionAudit.xsd"
+		namespace="http://nequi.co/message/integration/services/AddPromotionAudit">
+	</import>
+
+	<import schemaLocation="GetRulesDescription.xsd" namespace="http://nequi.co/message/integration/services/GetRulesDescription"></import>
+	<element name="integrationRQ">
+		<complexType>
+			<sequence>
+				<element ref="agw:integrationRequest"></element>
+			</sequence>
+		</complexType>
+	</element>
+
+	<element name="integrationRS">
+		<complexType>
+			<sequence>
+				<element ref="agw:integrationResponse"></element>
+			</sequence>
+		</complexType>
+	</element>
+
+	<element name="integrationRequest"
+		type="agw:integrationRequestType">
+	</element>
+
+	<complexType name="integrationRequestType">
+		<sequence>
+			<element name="header" type="agw:RequestHeaderType"
+				minOccurs="1" maxOccurs="1">
+			</element>
+			<element name="body" type="agw:RequestBodyType"
+				minOccurs="1" maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="RequestHeaderType">
+		<sequence>
+			<element name="consumer" type="agw:consumerType"
+				minOccurs="1" maxOccurs="1">
+			</element>
+			<element name="channel" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="messageId" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="requestDateTime" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="destination" type="agw:destinationType"
+				minOccurs="1" maxOccurs="1">
+			</element>
+			<element name="messageContext" type="agw:messageContextType"
+				minOccurs="0" maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="ResponseBodyType">
+		<choice>
+			<element ref="Q4:UpdatePromotionRuleResponse"></element>
+			<element ref="Q2:getPromotionDetailResponse"></element>
+			<element ref="Q3:addPromotionAuditResponse"></element>
+			<element ref="Q5:getRulesDescriptionResponse"></element>
+		</choice>
+	</complexType>
+
+	<complexType name="consumerType">
+		<sequence>
+			<element name="id" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="description" type="string" minOccurs="0"
+				maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="destinationType">
+		<sequence>
+			<element name="service" type="agw:serviceType" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="region" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="container" type="agw:containerType"
+				minOccurs="1" maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="containerType">
+		<sequence>
+			<element name="id" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="name" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="type" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="serviceType">
+		<sequence>
+			<element name="name" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="operation" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="version" type="string" minOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+
+	<complexType name="dataType">
+		<sequence>
+			<any></any>
+		</sequence>
+	</complexType>
+
+	<complexType name="messageContextType">
+		<sequence>
+			<element name="property" type="agw:propertyType"
+				minOccurs="1" maxOccurs="unbounded">
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="propertyType">
+		<sequence>
+			<element name="key" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="value" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+
+	<element name="integrationResponse"
+		type="agw:integrationResponseType">
+	</element>
+
+	<complexType name="integrationResponseType">
+		<sequence>
+			<element name="header" type="agw:ResponseHeaderType"></element>
+			<element name="body" type="agw:ResponseBodyType"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="statusType">
+		<sequence>
+			<element name="code" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="description" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="system" type="string" minOccurs="0"
+				maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="providerType">
+		<sequence>
+			<element name="id" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="name" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="ResponseHeaderType">
+		<sequence>
+			<element name="messageId" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="responseDate" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="status" type="agw:statusType" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="provider" type="agw:providerType"
+				minOccurs="1" maxOccurs="1">
+			</element>
+			<element name="destination" type="agw:destinationType"
+				minOccurs="1" maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+
+
+	<complexType name="RequestBodyType">
+		<choice>
+			<element ref="Q4:UpdatePromotionRuleRequest"></element>
+			<element ref="Q2:getPromotionDetailRequest"></element>
+			<element ref="Q3:addPromotionAuditRequest"></element>
+			<element ref="Q5:getRulesDescriptionRequest"></element>
+		</choice>
+	</complexType>
+</schema>

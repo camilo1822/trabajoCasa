@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:UserPocketServiceResponse xmlns:tns="http://www.grupobancolombia.com/BandaDigital/services/UserPocketService" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.grupobancolombia.com/BandaDigital/services/UserPocketService SHP_MSG_UserPocketService.xsd ">
+  <tns:UserPocketRS>
+    <tns:data>
+      <tns:balance>tns:balance</tns:balance>
+      <tns:spendBoundary>tns:spendBoundary</tns:spendBoundary>
+      <tns:numPockets>tns:numPockets</tns:numPockets>
+    </tns:data>
+  </tns:UserPocketRS>
+</tns:UserPocketServiceResponse>

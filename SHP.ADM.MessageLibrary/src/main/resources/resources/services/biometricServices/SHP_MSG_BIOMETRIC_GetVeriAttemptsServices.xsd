@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.grupobancolombia.com/BandaDigital/services/GetVeriAttemptsServices" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.grupobancolombia.com/BandaDigital/services/GetVeriAttemptsServices">
+
+    <element name="GetVeriAttemptsServiceRequest" type="tns:GetVeriAttemptsServiceRequestType"></element>
+
+    <complexType name="GetVeriAttemptsServiceRequestType">
+    	<sequence>
+    		<element name="getVeriAttemptsRQ" type="tns:GetVeriAttemptsRQType"></element>
+    	</sequence>
+    </complexType>
+    
+    <element name="GetVeriAttemptsServiceResponse" type="tns:GetVeriAttemptsServiceResponseType"></element>
+
+    <complexType name="GetVeriAttemptsServiceResponseType">
+    	<sequence>
+    		<element name="getVeriAttemptsRS" type="tns:GetVeriAttemptsRSType"></element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="GetVeriAttemptsRQType">
+    	<sequence>
+    		<element name="phoneNumber" type="string" minOccurs="1" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="GetVeriAttemptsRSType">
+    	<sequence>
+    		<element name="cifId" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="attempts" type="tns:AttemptsType" minOccurs="0" maxOccurs="unbounded"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="AttemptsType">
+    	<sequence>
+    		<element name="date" type="string"></element>
+    		<element name="status" type="string"></element>
+    	</sequence>
+    </complexType>
+
+
+    
+
+    
+
+</schema>

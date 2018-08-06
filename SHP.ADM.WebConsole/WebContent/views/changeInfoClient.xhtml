@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Login</title>
+</h:head>
+
+<h:body>
+    <ui:composition template="./templateAdministrative.xhtml">
+        <ui:define name="content">
+        	<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+           	<p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+			    <p:graphicImage name="/images/ajax-loader.gif" />
+			</p:dialog>
+        	<p:growl id="growl" sticky="true" showDetail="true" life="1000" />
+        	<h:form id="formSearchUser" class="form-search-user">
+        		<div class="div-search-user">
+                     <p:panel id="basic" header="#{msg['change.info.client.search']}">
+                         <h:panelGrid columns="2" cellpadding="2">
+
+                             <h:outputLabel for="documentNumber" value="#{msg['change.info.client.number.document']}" style="font-weight:bold"/>
+                             <p:inputText id="documentNumber" label="#{msg['change.info.client.input.document.label']}" value="#{clientMGBean.numberDocument}" validator="#{clientMGBean.validateDocument}" validatorMessage="Formato de documento inválido." required="true"/>
+
+                             <h:outputText value="#{msg['change.info.form.type.id']}" style="font-weight:bold"/>
+	                         <p:selectOneMenu  value="#{clientMGBean.documentType}" style="width: 85%;" required="true" label="#{msg['change.info.client.select.type.document.label']}">
+	                             <f:selectItem itemLabel="- #{msg['common.select']} -" itemValue="" />
+	                             <f:selectItems value="#{clientMGBean.selectOneItemTypeId}" />
+	                         </p:selectOneMenu>
+
+                             <f:facet name="footer">
+                                  <p:separator/>
+                                  <p:commandButton id="btnSearchUser" update="growl,:formDataUser:userTable" icon="ui-icon-search" title="Buscar" value="Buscar" actionListener="#{clientMGBean.searchUser()}" rendered="#{clientMGBean.permissionRol.read == 1}"/>
+                                  <p:commandButton id="btnCleanSearch" styleClass="margin-left-button-clean-search" update=":formDataUser:userTable" icon="ui-icon-trash" title="Limpiar" value="Limpiar" oncomplete="cleanInputDocumentNumberSearch()"  actionListener="#{clientMGBean.cleanSearch()}" rendered="#{clientMGBean.permissionRol.read == 1}"/>
+                              </f:facet>
+                         </h:panelGrid>
+                     </p:panel>
+                 </div>
+        	</h:form>
+
+        	<h:form id="formDataUser" class="data-table-client-edit">
+
+			   <p:dataTable id="userTable" var="user" value="#{clientMGBean.userSearch}" editable="true" style="margin-bottom:20px; text-align: center;">
+			       <f:facet name="header">
+			       	<h:outputText value="#{msg['change.info.client.list.header']}"/>
+			       </f:facet>
+
+			       <p:column headerText="#{msg['change.info.client.list.nickname']}" width="12%">
+			               <h:outputText value="#{user.nickname}"/>
+			       </p:column>
+
+			       <p:column headerText="#{msg['change.info.client.list.first.name']}" width="12%">
+			               <h:outputText value="#{user.nombre1}"/>
+			       </p:column>
+
+			       <p:column headerText="#{msg['change.info.client.list.second.name']}" width="12%">
+			               <h:outputText value="#{user.nombre2}"/>
+			       </p:column>
+
+			       <p:column headerText="#{msg['change.info.client.list.first.lastname']}" width="12%">
+			               <h:outputText value="#{user.apellido1}"/>
+			       </p:column>
+
+			       <p:column headerText="#{msg['change.info.client.list.second.lastname']}" width="12%">
+			               <h:outputText value="#{user.apellido2}"/>
+			       </p:column>
+
+			       <p:column headerText="#{msg['change.info.client.list.email']}">
+			               <h:outputText value="#{user.correoElectronico}"/>
+			       </p:column>
+
+			       <p:column headerText="#{msg['change.info.client.list.block']}" style="width: 62px;">
+			       		<p:commandLink update=":formBlockClient" oncomplete="PF('blockDialog').show()" id="viewMoreBlockLink" value="#{msg['change.info.client.list.view.more']}">
+					        <f:setPropertyActionListener value="#{user}" target="#{clientMGBean.selectedUser}" />
+					    </p:commandLink>
+			       </p:column>
+
+			       <p:column headerText="#{msg['change.info.client.list.edit']}" style="width:32px;text-align: center" rendered="#{clientMGBean.permissionRol.write == 1}">
+		             <p:commandButton update=":formUpdateDataUser" oncomplete="PF('userDialog').show()" icon="ui-icon-pencil" title="Editar">
+		                <f:setPropertyActionListener value="#{user}" target="#{clientMGBean.selectedUser}" />
+		             </p:commandButton>
+		           </p:column>
+
+			   </p:dataTable>
+			 </h:form>
+
+			 <h:form id="formUpdateDataUser" class="data-table-user-edit">
+			   <p:dialog header="#{msg['change.info.client.modify.form.title']}" widgetVar="userDialog" modal="true" showEffect="fade" hideEffect="explode" resizable="false">
+		            <h:panelGrid id="panelModifyUser" columns="2" cellpadding="4" style="margin:0 auto;">
+
+		                <h:outputText value="#{msg['change.info.client.list.nickname']}" />
+		                <p:inputText value="#{clientMGBean.selectedUser.nickname}" validatorMessage="No se permite ingresar acentos ni caracteres especiales en el nickname.">
+		                	<f:validateRegex pattern = "^[a-zA-Z\s]*$"/>
+		                </p:inputText>
+
+		                <h:outputText value="#{msg['change.info.client.list.first.name']}" />
+		                <p:inputText value="#{clientMGBean.selectedUser.nombre1}" validatorMessage="No se permite ingresar acentos ni caracteres especiales en el primer nombre.">
+		                	<f:validateRegex pattern = "^[a-zA-Z\s]*$"/>
+		                </p:inputText>
+
+		                <h:outputText value="#{msg['change.info.client.list.second.name']}" />
+		                <p:inputText value="#{clientMGBean.selectedUser.nombre2}" validatorMessage="No se permite ingresar acentos ni caracteres especiales en el segundo nombre.">
+		                	<f:validateRegex pattern = "^[a-zA-Z\s]*$"/>
+		                </p:inputText>
+
+		                <h:outputText value="#{msg['change.info.client.list.first.lastname']}" />
+		                <p:inputText value="#{clientMGBean.selectedUser.apellido1}" validatorMessage="No se permite ingresar acentos ni caracteres especiales en el primer apellido.">
+		                	<f:validateRegex pattern = "^[a-zA-Z\s]*$"/>
+		                </p:inputText>
+
+		                <h:outputText value="#{msg['change.info.client.list.second.lastname']}" />
+		                <p:inputText value="#{clientMGBean.selectedUser.apellido2}" validatorMessage="No se permite ingresar acentos ni caracteres especiales en el segundo apellido.">
+		                	<f:validateRegex pattern = "^[a-zA-Z\s]*$"/>
+		                </p:inputText>
+
+		                <h:outputText value="#{msg['change.info.client.list.email']}" />
+		                <p:inputText value="#{clientMGBean.selectedUser.correoElectronico}">
+		                	<f:validator validatorId="custom.emailValidator" />
+		                </p:inputText>
+
+		                <f:facet name="footer">
+		                   <p:separator/>
+                           <p:commandButton id="btnUpdateAccept" update=":formDataUser, :growl" oncomplete="PF('userDialog').hide()" actionListener="#{clientMGBean.btnUpdateUser(actionEvent)}" icon="ui-icon-check" title="Modificar" value="Modificar"/>
+                           <p:commandButton id="btnUpdateCancel" oncomplete="PF('userDialog').hide()" icon="ui-icon-close" title="Cancelar" value="Cancelar"/>
+                        </f:facet>
+		            </h:panelGrid>
+			    </p:dialog>
+   			</h:form>
+
+   			<h:form id="formBlockClient" class="data-table-user-edit">
+			   <p:dialog header="#{msg['change.info.client.block.form.title']}" widgetVar="blockDialog" modal="true" showEffect="fade" hideEffect="explode" resizable="false" width="60%" closable="true" closeOnEscape="true" >
+		            <h:panelGrid id="panelModifyUser" columns="2" cellpadding="4" style="margin:0 auto;">
+
+		                <p:dataTable id="dataBlockTable" rowIndexVar="index" var="block" value="#{clientMGBean.blocksUser}">
+						    <p:column headerText="#{msg['change.info.client.block.list.type.block']}" width="15%">
+						        <h:outputText value="#{block.tipoBloqueo}" />
+						    </p:column>
+
+						    <p:column headerText="#{msg['change.info.client.block.list.date.block']}" width="19%">
+						        <h:outputText value="#{block.fechaBloqueo}" />
+						    </p:column>
+
+						    <p:column headerText="#{msg['common.description']}" width="50%">
+						        <h:outputText value="#{block.desc}" />
+						    </p:column>
+
+						    <p:column width="16%">
+						        <p:commandButton id="btnUnlock" icon="ui-icon-unlocked" rendered="#{block.unLock}" title="#{msg['change.info.client.block.unlock.title']}" value="#{msg['change.info.client.block.unlock']}"
+						        		actionListener="#{clientMGBean.unLock(index)}" update="formBlockClient:dataBlockTable, growl">
+						        </p:commandButton>
+						    </p:column>
+						</p:dataTable>
+
+		                <f:facet name="footer">
+                           <p:commandButton id="btnBlockCancel" oncomplete="PF('blockDialog').hide()" icon="ui-icon-close" title="#{msg['common.form.button.cancel']}" value="#{msg['common.close']}"/>
+                        </f:facet>
+		            </h:panelGrid>
+			    </p:dialog>
+   			</h:form>
+
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

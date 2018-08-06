@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.grupobancolombia.com/BandaDigital/services/SHP_MSG_ESB" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.grupobancolombia.com/BandaDigital/services/SHP_MSG_ESB">
+
+    <element name="requestHeaderOut" type="tns:requestHeaderOutType"></element>
+
+    <complexType name="requestHeaderOutType">
+    	<sequence>
+    		<element name="Header" type="tns:HeaderRequestType"></element>
+    		<element name="Body" type="tns:BodyType"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="HeaderRequestType">
+    	<sequence>
+    		<element name="systemId" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="messageId" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="invokerDateTime" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="securityCredential"
+    			type="tns:securityCredentialType" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="destination" type="tns:destinationType"
+    			minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="messageContext" type="tns:MessageContextType" minOccurs="1" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="securityCredentialType">
+    	<sequence>
+    		<element name="userName" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="userToken" type="string" minOccurs="1" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="destinationType">
+    	<sequence>
+    		<element name="name" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="namespace" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="operation" type="string" minOccurs="1" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="BodyType">
+    	<sequence>
+    		<any minOccurs="0"/>
+    	</sequence>
+    </complexType>
+
+    <element name="responseHeaderOut" type="tns:responseHeaderOutType"></element>
+
+    <complexType name="responseHeaderOutType">
+    	<sequence>
+    		<element name="Header" type="tns:HeaderResponseType"></element>
+    		<element name="Body" type="tns:BodyType"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="HeaderResponseType">
+    	<sequence>
+    		<element name="systemId" type="string"></element>
+    		<element name="messageId" type="string"></element>
+    		<element name="invokerDateTime" type="string"></element>
+            <element name="destination" type="tns:destinationType"></element>
+            <element name="responseStatus"
+    			type="tns:ResponseStatusType">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="ResponseStatusType">
+    	<sequence>
+    		<element name="statusDesc" type="string"></element>
+    		<element name="statusCode" type="string"></element>
+    		<element name="errorMessage" type="string"></element>
+    		<element name="system" type="string"></element>
+    	</sequence>
+    </complexType>
+
+    <element name="RequestHeaderOutMessage" type="tns:RequestHeaderOutMessageType"></element>
+
+    <complexType name="RequestHeaderOutMessageType">
+    	<sequence>
+    		<element name="requestHeaderOut" type="tns:requestHeaderOutType"></element>
+    	</sequence>
+    </complexType>
+
+    <element name="responseHeaderOutMessage" type="tns:responseHeaderOutMessageType"></element>
+
+    <complexType name="responseHeaderOutMessageType">
+    	<sequence>
+    		<element name="responseHeaderOut" type="tns:responseHeaderOutType"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="MessageContextType">
+    	<sequence>
+    		<element name="property" type="tns:PropertyType" minOccurs="0" maxOccurs="unbounded"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="PropertyType">
+    	<sequence>
+    		<element name="key" type="string" minOccurs="1" maxOccurs="1"></element>
+    		<element name="value" type="string" minOccurs="1" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+</schema>

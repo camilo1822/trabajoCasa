@@ -1,0 +1,1 @@
+carpeta temporal para guardar los archivos con los documentos para la validacion de documentos

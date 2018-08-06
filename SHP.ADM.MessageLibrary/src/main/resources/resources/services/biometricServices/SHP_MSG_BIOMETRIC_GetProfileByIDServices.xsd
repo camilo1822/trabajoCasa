@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.grupobancolombia.com/BandaDigital/services/GetProfileByIDServices" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.grupobancolombia.com/BandaDigital/services/GetProfileByIDServices">
+
+    <element name="GetProfileByIDServiceRequest" type="tns:GetProfileByIDServiceRequestType"></element>
+
+    <complexType name="GetProfileByIDServiceRequestType">
+    	<sequence>
+    		<element name="getProfileByIDRQ" type="tns:GetProfileByIDRQType"></element>
+    	</sequence>
+    </complexType>
+    
+    <element name="GetProfileByIDServiceResponse" type="tns:GetProfileByIDServiceResponseType"></element>
+
+    <complexType name="GetProfileByIDServiceResponseType">
+    	<sequence>
+    		<element name="getProfileByIDRS" type="tns:GetProfileByIDRSType"></element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="GetProfileByIDRQType">
+    	<sequence>
+    		<element name="phoneNumber" type="string" minOccurs="1" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="GetProfileByIDRSType">
+    	<sequence>
+    		<element name="profileUniqueIdentifier" type="string"
+    			minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="profileIID" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="isFaceEnrolled" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="isVoiceEnrolled" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="enrollmentDateTime" type="string"
+    			minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="isProfileBlocked" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="face" type="tns:FaceType" minOccurs="0"
+    			maxOccurs="1">
+    		</element>
+    		<element name="voice" type="tns:VoiceType" minOccurs="0"
+    			maxOccurs="1">
+    		</element>
+    		<element name="palm" type="tns:PalmType" minOccurs="0" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="FaceType">
+    	<sequence>
+    		<element name="data" type="string"></element>
+    		<element name="imageType" type="string"></element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="VoiceType">
+    	<sequence>
+    		<element name="data" type="string"></element>
+    		<element name="voiceFormat" type="string"></element>
+    		<element name="utterance" type="string"></element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="PalmType">
+    	<sequence>
+    		<element name="data" type="string"></element>
+    		<element name="imageType" type="string"></element>
+    	</sequence>
+    </complexType>
+
+
+    
+
+    
+    
+    
+    <complexType name="FilterType">
+    	<sequence>
+    		<element name="name" type="string"></element>
+    	</sequence>
+    </complexType>
+</schema>

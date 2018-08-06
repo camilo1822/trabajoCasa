@@ -1,0 +1,20 @@
+<RequestMessageObject>
+	<RequestMessage>
+		<RequestHeader>
+			<Channel>Channel</Channel>
+			<RequestDate>RequestDate</RequestDate>
+			<TransactionID>TransactionID</TransactionID>
+		</RequestHeader>
+		<RequestBody>
+			<tns:TransactionServiceRequest
+				xmlns:tns="http://www.grupobancolombia.com/BandaDigital/services/TransactionService"
+				xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				xsi:schemaLocation="http://www.grupobancolombia.com/BandaDigital/services/TransactionService ../resources/SHP_MSG_TransactionService.xsd ">
+				<tns:InitTransaction>
+					<tns:Operation>tns:Operation</tns:Operation>
+					<tns:PhoneNumber>tns:PhoneNumber</tns:PhoneNumber>
+				</tns:InitTransaction>
+			</tns:TransactionServiceRequest>
+		</RequestBody>
+	</RequestMessage>
+</RequestMessageObject>

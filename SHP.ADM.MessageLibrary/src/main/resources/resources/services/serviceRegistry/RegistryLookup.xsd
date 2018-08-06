@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://nequi.co/message/registry/ServiceRegistry/lookup" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://nequi.co/message/registry/ServiceRegistry/lookup">
+
+    <element name="lookupRequest" type="tns:lookupRequestType"></element>
+
+    <element name="lookupResponse" type="tns:lookupResponseType"></element>
+
+    <complexType name="lookupRequestType">
+    	<sequence>
+    		<element name="name" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+            <element name="classification" type="string" minOccurs="1" maxOccurs="1"></element>
+            <element name="operation" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="version" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="region" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="lookupResponseType">
+    	<sequence>
+    		<element name="endpoint" type="tns:endpointType"></element>
+    		<element name="timeout" type="tns:timeoutType"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="endpointType">
+    	<sequence>
+    		<element name="protocol" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="host" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="port" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="context" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+
+    		<element name="authBasicUser" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="authBasicPwd" type="string" minOccurs="1" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="timeoutType">
+    	<sequence>
+    		<element name="connection" type="string" minOccurs="1" maxOccurs="1"></element>
+    		<element name="read" type="string" minOccurs="1" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+</schema>

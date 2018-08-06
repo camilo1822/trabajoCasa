@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema
+	targetNamespace="http://nequi.co/message/integration/services/GetRulesDescription"
+	elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://nequi.co/message/integration/services/GetRulesDescription">
+
+	<element name="getRulesDescriptionRequest" type="tns:getRulesDescriptionRequestType"></element>
+
+
+
+	<element name="getRulesDescriptionResponse" type="tns:getRulesDescriptionResponseType">
+	</element>
+
+
+
+
+
+	<complexType name="getRulesDescriptionRequestType">
+		<sequence>
+			<element name="region" type="string" minOccurs="1" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="getRulesDescriptionResponseType">
+		<sequence>
+			<element name="description" type="tns:descriptionType" minOccurs="0" maxOccurs="unbounded"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="descriptionType">
+		<sequence>
+			<element name="descriptionRule" type="string"></element>
+			<element name="promotionType" type="string"></element>
+			<element name="service" type="string"></element>
+			<element name="idPromOperacion" type="string"></element>
+		</sequence>
+	</complexType>
+</schema>

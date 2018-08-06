@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+    <h:head>
+    	<title></title>
+	</h:head>
+	<h:body>
+		<ui:composition template="./templateAdministrative.xhtml">
+			<ui:define name="content">
+			<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+           	<p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+			    <p:graphicImage name="/images/ajax-loader.gif" />
+			</p:dialog>
+			 <h:form>
+				<div class="">
+					<p:commandButton id="btnGoBack" actionListener="#{userMGBean.redirectListUser()}" icon="ui-icon-circle-arrow-w" title="#{msg['manage.user.form.button.go.back']}" value="#{msg['manage.user.form.button.go.back']}" style="margin-top: 1%; margin-left: 1%;"/>
+				</div>
+			</h:form>
+			 <p:fieldset id="fieldUser" legend="#{msg['manage.user.common.create.user']}" style="margin-bottom:20px; margin-top: 4%;">
+                     <p:messages id="messages" showDetail="true"  closable="true"  /> 
+                     <p:spacer height="5" />
+                     <h:form id="formCreateUser" style="">
+	                     <h:panelGrid  id="panelCreateUser" columns="2" cellpadding="4" style="margin:0 auto;">
+	                         <h:outputText value="#{msg['manage.user.form.name']}" styleClass="outputlabel-bold"/>
+	                         <p:inputText value="#{userMGBean.selectedUser.nombres}" required="true" label="#{msg['manage.user.form.name']}" ><f:validateLength maximum="60" /></p:inputText>
+	                         
+	                         <h:outputText value="#{msg['manage.user.form.last.name']}" styleClass="outputlabel-bold"/>
+	                         <p:inputText value="#{userMGBean.selectedUser.apellidos}" required="true" label="#{msg['manage.user.form.last.name']}"><f:validateLength maximum="60" /></p:inputText>
+	                         
+	                         <h:outputText value="#{msg['manage.user.form.rol']}" styleClass="outputlabel-bold"/>
+	                         <p:selectOneMenu  value="#{userMGBean.selectedUser.awRol.idRol}" style="width: 85%;" required="true" label="#{msg['manage.user.form.rol']}">
+	                             <f:selectItem itemLabel="- #{msg['common.select']} -" itemValue="" />
+	                             <f:selectItems value="#{userMGBean.selectOneItemRol}" />
+	                         </p:selectOneMenu>
+	                         
+	                         <h:outputText value="#{msg['manage.user.form.email']}" styleClass="outputlabel-bold"/>
+	                         <p:inputText value="#{userMGBean.selectedUser.mail}" required="true" label="#{msg['manage.user.form.email']}">
+	                         	<f:validateLength maximum="60" />
+	                         	<f:validator validatorId="custom.emailValidator" />
+	                         </p:inputText>
+	                         
+	                         <h:outputText value="#{msg['manage.user.form.phone.number']}" styleClass="outputlabel-bold"/>
+	                         <p:inputText value="#{userMGBean.selectedUser.celular}" label="#{msg['manage.user.form.phone.number']}" onkeypress="return justNumbers(event);"/>
+	                         	                         
+	                         <p:separator style="width: 233%;" />
+	                         <h:outputText/>
+	                    	 <p:commandButton  update=":messages" icon="ui-icon-disk" value="#{msg['common.form.button.ok']}" actionListener="#{userMGBean.saveUser()}"/>
+	                      </h:panelGrid>
+                      </h:form> 
+                      <p:commandButton process="@this" update="formCreateUser" style="margin-left: 50%; margin-top: -32px;" actionListener="#{userMGBean.cleanFormCreateUser()}" icon="ui-icon-trash" value="#{msg['common.form.button.clean']}" />
+			 </p:fieldset>	
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</html>

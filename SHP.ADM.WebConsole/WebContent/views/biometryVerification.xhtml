@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Verificaci&oacute;n de biometr&iacute;a</title>
+</h:head>
+
+<h:body>
+    <ui:composition template="./templateAdministrative.xhtml">
+            <ui:define name="content">
+            	<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+	           	<p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+				    <p:graphicImage name="/images/ajax-loader.gif" />
+				</p:dialog>	
+                <h:form id="formBiometryVerification">
+                	<p:growl id="growl" sticky="true" showDetail="true" life="1000" />
+                    <div class="main-form-style main-form-horizontally-center-aligned">
+                        <p:panel id="basic" header="#{msg['common.nequi.biometry.verification.form.header']}" styleClass="form-horizontally-center-aligned">
+                            <h:panelGrid columns="2" cellpadding="2">
+
+                                <h:outputLabel for="phoneNumber" value="#{msg['common.nequi.biometry.verification.form.number']}" style="font-weight:bold"/>
+                                <h:inputText id="phoneNumber" label="phoneNumber" value="#{biometryVerificationMGBean.phoneNumber}" onkeypress="return justNumbers(event);"/>
+                                
+                                <f:facet name="footer">
+                                     <p:separator/>
+                                     <p:commandButton id="btnSendPushBiometryVerification" rendered="#{biometryVerificationMGBean.permissionRol.write ==1}" value="#{msg['common.nequi.biometry.verification.label.sendpush']}" update="growl" icon="ui-icon-check" actionListener="#{biometryVerificationMGBean.sendPushBiometryVerification()}" />
+                                     <p:commandButton process="@this" update="formBiometryVerification, :formDataBiometryVerificationList" actionListener="#{biometryVerificationMGBean.cleanFormBiometryVerification()}" icon="ui-icon-trash" value="#{msg['common.form.button.clean']}"/>
+                                     <p:commandButton rendered="#{biometryVerificationMGBean.permissionRol.read ==1}" id="btnSearchBiometryVerificationDetails" update="growl,:formDataBiometryVerificationList" icon="fa fa-fw fa-search" title="#{msg['common.search']}" value="#{msg['common.search']}" actionListener="#{biometryVerificationMGBean.biometryVerificationList()}" />
+                                 </f:facet>
+                            </h:panelGrid>
+                        </p:panel>
+                    </div>
+                </h:form>
+                <div>
+	                <h:form id="formDataBiometryVerificationList" class="data-table-biometry-verification-details">
+					    <p:dataTable id="listTable" var="list" value="#{biometryVerificationMGBean.biometryVerificationList}" editable="true" style="margin-bottom:20px"
+					                 paginator="true" rows="10" paginatorPosition="bottom">
+					       <f:facet name="header">
+					            <h:outputText value="#{msg['biometry.verification.table.title']}" style="text-align:center;"/>
+					       </f:facet>
+					 
+					       <p:column headerText="#{msg['biometry.verification.table.deviceid']}" style="text-align:center;">
+					               <h:outputText value="#{list.deviceId}"/>
+					       </p:column>
+					       
+					       <p:column headerText="#{msg['biometry.verification.table.fecha']}" width="12%" style="text-align:center;">
+					               <h:outputText value="#{list.fecha}"><f:converter converterId="co.bdigital.admin.util.converter.StringDateConverter" /></h:outputText>
+					       </p:column>
+					       
+					       <p:column headerText="#{msg['biometry.verification.table.estado']}" width="8%" style="text-align:center;">
+					               <h:outputText value="#{list.estado}"/>
+					       </p:column>
+					       
+					       <p:column headerText="#{msg['biometry.verification.table.resultado']}" style="text-align:center;">
+					               <h:outputText value="#{list.resultado}"/>
+					       </p:column>
+					       
+					       <p:column headerText="#{msg['biometry.verification.table.tipo']}" style="text-align:center;">
+					               <h:outputText value="#{list.tipo}"/>
+					       </p:column>
+					       
+					   </p:dataTable>
+				   </h:form> 
+			   </div>
+            </ui:define>
+        </ui:composition>
+</h:body>
+</html>

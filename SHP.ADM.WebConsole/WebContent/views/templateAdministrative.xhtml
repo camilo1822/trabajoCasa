@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="./css/default.css"/>
+        <h:outputStylesheet name="./css/cssLayout.css"/>
+        <h:outputScript name="./js/templateAdministrative.js"/>
+        <title>Web Administrativa</title>
+</h:head>
+
+<h:body onload="movesClock()">
+    <div id="top" class="ui-widget-header ui-corner-all">
+            <ui:insert name="top">
+                <h2 class="titleHeader" >Web Administrativa Nequi </h2>
+                <p:graphicImage name="/images/bandera_de_colombia.png" rendered="#{loginMGBean.region eq 'C001'}"/>
+                <p:graphicImage name="/images/bandera_de_panama.png" rendered="#{loginMGBean.region eq 'P001'}"/>
+                <span style="    display: block; margin-top: -25px; margin-left: 61px;">
+                	#{msg['manage.user.welcome']} <h:outputText value="#{loginMGBean.userName}"/>
+                </span>
+             
+                <h:form style="display: inline">
+                    <div class="logout">
+                        <p:commandLink id="ajax" actionListener="#{loginMGBean.logout}">
+                            <h:outputText value="Logout"/>
+                        </p:commandLink>
+                    </div> 
+                </h:form>
+                
+                <form name="form_clock" class="clock">
+                    <label>Hora: </label>
+                    <input type="text" name="reloj" size="10" readonly="readonly" style="background-color: gainsboro;"/> 
+                </form> 
+                   
+            </ui:insert>
+        </div>
+        <div style="height: 90%">
+            <div id="left" class="ui-corner-all">
+                <ui:insert name="left">
+                    <h3 style="margin-top:0">Menu</h3>
+                    <p:tree value="#{treeBasicVwBean.root}" var="node">
+                        <p:treeNode>
+                               <h:outputLink value="#{node.link}">#{node.label}</h:outputLink>
+                        </p:treeNode>
+                    </p:tree> 
+                </ui:insert>
+            </div>
+            <div id="content" class="left_content ui-corner-all">
+            	<ui:include src="./sessionTimeOut.xhtml" />
+                <ui:insert name="content"></ui:insert>
+            </div>
+            <div id="bottom" class="ui-widget-header ui-corner-all">
+	            <ui:insert name="bottom">
+	                <h3>Pie de Pagina</h3>
+	            </ui:insert>
+	        </div>
+        </div>
+</h:body>
+</html>

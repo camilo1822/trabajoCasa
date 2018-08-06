@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.grupobancolombia.com/BandaDigital/services/BlockClientServices" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.grupobancolombia.com/BandaDigital/services/BlockClientServices">
+	<element name="BlockClientServiceRequest" type="tns:BlockClientServiceRequestType"></element>
+
+    <complexType name="BlockClientServiceRequestType">
+    	<sequence>
+    		<element name="blockClientRQ" type="tns:BlockClientRQType"></element>
+    	</sequence>
+    </complexType>
+    
+    <element name="BlockClientServiceResponse" type="tns:BlockClientServiceResponseType"></element>
+
+    <complexType name="BlockClientServiceResponseType">
+    	<sequence>
+    		<element name="blockClientRS" type="tns:BlockClientRSType"></element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="BlockClientRQType">
+    	<sequence>
+    		<element name="phoneNumber" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="lockType" type="string" minOccurs="1" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="BlockClientRSType">
+    </complexType>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</schema>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title></title>
+</h:head>
+
+<h:body>
+    <ui:composition template="./templateAdministrative.xhtml">
+            <ui:define name="content">
+            	<p:growl id="growl" sticky="true" showDetail="true" life="1000" />
+            	<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+            	<p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+				    <p:graphicImage name="/images/ajax-loader.gif" />
+				</p:dialog>
+				<div class="div-manage-profile">
+				<p:tabView id="tabManageProfile">
+			        <p:tab title="#{msg['manage.profile.tabview.create.profile']}" rendered="#{profileMGBean.permissionRol.write == 1}">
+		        		<p:outputPanel deferred="true">
+		                    <h:form id="formCreateProfile">			 
+							    <p:wizard flowListener="#{profileMGBean.onFlowProcess}" nextLabel="#{msg['common.next']}" backLabel="#{msg['common.back']}" >
+							        <p:tab id="createProfile" title="#{msg['manage.profile.tab.profile']}">
+							            <p:panel header="#{msg['manage.profile.panel.create.profile']}">
+							                <p:messages />
+							                <h:panelGrid columns="2" columnClasses="label, value">
+							                    <h:outputText styleClass="outputlabel-bold" value="#{msg['manage.profile.output.text.name.profile']}" />
+							                    <p:inputText value="#{profileMGBean.nameProfile}" required="true" label="#{msg['manage.profile.output.text.name.profile']}"/>
+							                </h:panelGrid>
+							            </p:panel>
+							        </p:tab>
+							 
+							        <p:tab id="addPermissionsReadToProfile" title="#{msg['manage.profile.tab.read']}">
+							            <p:panel header="#{msg['manage.profile.panel.add.permission.read.profile']}">
+							                <p:messages />
+							                    <h3>#{msg['manage.profile.panel.title.only.read']}</h3>
+											    <p:selectManyCheckbox id="gridRead" value="#{profileMGBean.selectedOnlyRead}" layout="grid" columns="2">
+											        <f:selectItems value="#{profileMGBean.actionsRol}" var="rol" itemLabel="#{rol.name}" itemValue="#{rol.idAction}" />
+											    </p:selectManyCheckbox>
+							            </p:panel>
+							        </p:tab>
+							        
+							        <p:tab id="addPermissionsWriteToProfile" title="#{msg['manage.profile.tab.write']}">
+							            <p:panel header="#{msg['manage.profile.panel.add.permission.write.profile']}">
+							                <p:messages />
+							                    <h3>#{msg['manage.profile.panel.title.only.write']}</h3>
+											    <p:selectManyCheckbox id="gridWrite" value="#{profileMGBean.selectedOnlyWriter}" layout="grid" columns="2">
+											        <f:selectItems value="#{profileMGBean.actionsRol}" var="rol" itemLabel="#{rol.name}" itemValue="#{rol.idAction}" />
+											    </p:selectManyCheckbox>
+							            </p:panel>
+							        </p:tab>
+							        
+							        <p:tab id="confirmation" title="#{msg['manage.profile.tab.confirm']}">
+							            <p:panel header="#{msg['manage.profile.panel.confirm.title']}">
+							                <p:messages />
+							                <h:panelGrid columns="2" columnClasses="label, value">
+							                	 <h:outputText value="#{msg['manage.profile.panel.confirm.text.read']}" styleClass="outputlabel-bold"/>
+		                        				 <h:outputText value="#{profileMGBean.textOnlyRead}"/>
+		                        				 
+		                        				 <h:outputText value="#{msg['manage.profile.panel.confirm.text.write']}" styleClass="outputlabel-bold"/>
+		                        				 <h:outputText value="#{profileMGBean.textOnlyWrite}"/>
+							                </h:panelGrid>
+							                	<div style="text-align: end;">
+											    	<p:commandButton value="#{msg['manage.profile.panel.confirm.button.confirm']}" style="margin-top: 4%;" actionListener="#{profileMGBean.saveProfile}" update="growl" process="@this"/>
+											    </div>	
+							            </p:panel>
+							        </p:tab>
+							    </p:wizard>
+							</h:form>
+						</p:outputPanel>
+			        </p:tab>
+			        <p:tab title="#{msg['manage.profile.tabview.edit.profile']}">
+			            <p:dataList value="#{profileMGBean.listAllRol}" var="rol" type="ordered" itemType="none" paginator="true" paginatorPosition="bottom" rows="20" styleClass="paginated" emptyMessage="#{msg['manage.profile.data.list.empty']}">
+					        <f:facet name="header">
+					            #{msg['manage.profile.data.list.title']}
+					        </f:facet>
+					        <p:commandLink onsuccess="PF('wizUpdate').loadStep('addPermissionsReadUpdateToProfile', false)" update=":tabManageProfile:panelEditProfile" oncomplete="PF('updateDialog').show()"  title="#{msg['common.form.button.modify']}" styleClass="fa fa-fw fa-edit" style="float:left;margin-right:10px" rendered="#{profileMGBean.permissionRol.write == 1}">
+					            <f:setPropertyActionListener value="#{rol}" target="#{profileMGBean.selectedRol}" />
+					        </p:commandLink>
+					        <h:outputText value="#{rol.nombre}" style="display:inline-block"/>
+					    </p:dataList>
+					    <p:dialog header="#{msg['manage.profile.edit.dialog.title']}" widgetVar="updateDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
+					        <p:outputPanel id="panelEditProfile" style="text-align:center;">
+				            	<p:messages />
+			                    <h3>#{msg['manage.profile.edit.dialog.title.second']} #{profileMGBean.selectedRol.nombre}</h3>
+			                    <h:form id="formUpdateProfile">
+			                    	 <p:wizard widgetVar="wizUpdate" flowListener="#{profileMGBean.onFlowProcessUpdate}" nextLabel="#{msg['common.next']}" backLabel="#{msg['common.back']}">
+			                    	 	
+			                    	 	<p:tab id="addPermissionsReadUpdateToProfile" title="#{msg['manage.profile.tab.read']}">
+			                    	 		<p:panel header="#{msg['manage.profile.panel.add.permission.read.profile']}">
+			                    	 			<p:messages />
+			                    	 			 <h3>#{msg['manage.profile.panel.title.only.read']}</h3>
+											    <p:selectManyCheckbox id="gridReadUpdate" value="#{profileMGBean.selectedOnlyReadUpdate}" layout="grid" columns="2">
+											        <f:selectItems value="#{profileMGBean.actionsRol}" var="rol" itemLabel="#{rol.name}" itemValue="#{rol.idAction}" />
+											    </p:selectManyCheckbox>
+											</p:panel>	    
+										</p:tab>
+										
+										<p:tab id="addPermissionsWriteUpdateToProfile" title="#{msg['manage.profile.tab.write']}">
+								            <p:panel header="#{msg['manage.profile.panel.add.permission.write.profile']}">
+								                <p:messages />
+								                 <h3>#{msg['manage.profile.panel.title.only.write']}</h3>
+											    <p:selectManyCheckbox id="gridWriteUpdate" value="#{profileMGBean.selectedOnlyWriterUpdate}" layout="grid" columns="2">
+											        <f:selectItems value="#{profileMGBean.actionsRol}" var="rol" itemLabel="#{rol.name}" itemValue="#{rol.idAction}" />
+											    </p:selectManyCheckbox>
+								            </p:panel>
+								        </p:tab>
+								        
+								        <p:tab id="confirmationUpdate" title="#{msg['manage.profile.tab.confirm']}">
+								            <p:panel header="#{msg['manage.profile.panel.confirm.title']}">
+								                <p:messages />
+								                <h:panelGrid columns="2" columnClasses="label, value">
+								                	 <h:outputText value="#{msg['manage.profile.panel.confirm.text.read']}" styleClass="outputlabel-bold"/>
+			                        				 <h:outputText value="#{profileMGBean.textOnlyRead}"/>
+			                        				 
+			                        				 <h:outputText value="#{msg['manage.profile.panel.confirm.text.write']}" styleClass="outputlabel-bold"/>
+			                        				 <h:outputText value="#{profileMGBean.textOnlyWrite}"/>
+								                </h:panelGrid>
+								                	<div style="text-align: end;">
+												    	<p:commandButton oncomplete="PF('updateDialog').hide()" value="#{msg['manage.profile.panel.confirm.button.update']}" style="margin-top: 4%;" actionListener="#{profileMGBean.updateProfile}" update="growl" process="@this"/>
+												    </div>	
+								            </p:panel>
+								        </p:tab>
+							        	    
+									 </p:wizard>    
+								</h:form>    
+					        </p:outputPanel>
+					    </p:dialog>
+			        </p:tab>
+			    </p:tabView>
+    			</div>
+            </ui:define>
+     </ui:composition>
+</h:body>
+</html>

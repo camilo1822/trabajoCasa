@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Login</title>
+</h:head>
+
+<h:body>
+	<ui:composition template="./templateAdministrative.xhtml">
+		<ui:define name="content">
+			<p:ajaxStatus onstart="PF('statusDialog').show()"
+				onsuccess="PF('statusDialog').hide()" />
+			<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+				closable="false" resizable="false" showHeader="false">
+				<p:graphicImage name="/images/ajax-loader.gif" />
+			</p:dialog>
+			<div class="form-close-account outer-div-center">
+				<h:form id="formCloseAccount" styleClass="inner-div-center">
+					<p:growl id="growl" sticky="true" showDetail="true" life="1000" />
+					<p:panel id="basic"
+						header="#{msg['common.nequi.close.account.form.header']}"
+						style="margin-bottom:20px">
+						<h:panelGrid columns="2" cellpadding="2">
+							<h:outputLabel for="phoneNumber"
+								value="#{msg['common.nequi.close.account.form.number']}"
+								style="font-weight:bold" />
+							<p:inputText id="phoneNumber" label="phoneNumber"
+								value="#{closeAccountMGBean.phoneNumber}"
+								onkeypress="return justNumbers(event);" />
+
+							<h:outputText
+								value="#{msg['common.nequi.close.account.form.reason.label']}"
+								styleClass="outputlabel-bold" />
+							<p:selectOneMenu id="selectReasonCode"
+								value="#{closeAccountMGBean.reasonCode}"
+								label="#{closeAccountMGBean.reasonCode}"
+								styleClass="reason-code-input">
+								<f:selectItem itemLabel="- #{msg['common.select']} -"
+									itemValue="" />
+								<f:selectItems value="#{closeAccountMGBean.selectOneItemReason}" />
+							</p:selectOneMenu>
+
+							<h:outputText styleClass="outputlabel-bold"
+								value="#{msg['common.nequi.close.account.form.closurenotes']}" />
+							<p:inputTextarea maxlength="150" value="#{closeAccountMGBean.closureNotes}"
+								label="#{msg['common.nequi.close.account.form.closurenotes']}"/>
+								
+							<f:facet name="footer">
+								<p:separator />
+								<p:commandButton
+									rendered="#{closeAccountMGBean.permissionRol.write == 1}"
+									id="btnCloseAccount" update="growl"
+									onclick="PF('dialogCloseAccount').show()" icon="ui-icon-check"
+									title="Aceptar" value="Aceptar" />
+								<p:commandButton
+									rendered="#{closeAccountMGBean.permissionRol.write == 1}"
+									process="@this"
+									actionListener="#{closeAccountMGBean.cleanFormCloseAccount()}"
+									icon="ui-icon-trash" value="#{msg['common.form.button.clean']}" />
+							</f:facet>
+						</h:panelGrid>
+					</p:panel>
+				</h:form>
+			</div>
+			<div class="form-close-account outer-div-center">
+				<h:form id="formUploadAccountsToClose" styleClass="inner-div-center">
+					<p:growl id="growl" sticky="true" showDetail="true" life="1000" />
+					<p:panel id="panelUploadFile" header="#{msg['common.nequi.close.account.upload.title']}"
+						style="margin-bottom:20px">
+						<h:panelGrid columns="1" width="100%">
+							
+							<p:fileUpload fileUploadListener="#{closeAccountMGBean.loadData}"
+								label="#{msg['common.select.action']}"
+								uploadLabel="#{msg['common.upload']}"
+								cancelLabel="#{msg['common.form.button.cancel']}"
+								mode="advanced" dragDropSupport="flase" sizeLimit="100000"
+								fileLimit="20" allowTypes="/(\.|\/)(csv)$/" update="growl" />
+							<p:commandButton id="btnProcessClosing"
+								icon="fa fa-fw fa-check-circle-o"
+								title="#{msg['common.search']}"
+								value="#{msg['common.nequi.close.account.process.closing']}"
+								update="growl"
+								actionListener="#{closeAccountMGBean.processMassiveCloseAccount()}" />
+						</h:panelGrid>
+					</p:panel>
+				</h:form>
+
+			</div>
+			<h:form id="formConfirmClose">
+				<p:growl id="growl" sticky="true" showDetail="true" life="1000" />
+				<p:confirmDialog id="confirmDialog" showEffect="fade"
+					hideEffect="explode"
+					message="#{msg['common.nequi.close.account.confirmation.message']}"
+					header="#{msg['common.nequi.close.account.confirmation.title']}"
+					severity="alert" widgetVar="dialogCloseAccount">
+					<p:commandButton id="confirm" value="Aceptar" update="growl"
+						icon="ui-icon-check" oncomplete="PF('dialogCloseAccount').hide()"
+						actionListener="#{closeAccountMGBean.closeAccount()}" />
+					<p:commandButton id="decline" value="Cancelar" type="button"
+						icon="ui-icon-close" onclick="PF('dialogCloseAccount').hide()" />
+				</p:confirmDialog>
+			</h:form>
+			<h:form id="formDataCloseAccoutReasonCode"
+				class="data-table-user-edit outer-div-center">
+				<p:dataTable id="listTableClAcntReasonCode"
+					styleClass="inner-div-center" var="listClAcntReasonCode"
+					value="#{closeAccountMGBean.reasons}" editable="true"
+					style="margin-bottom:20px" paginator="true" rows="15"
+					paginatorPosition="bottom">
+					<f:facet name="header">
+						<h:outputText
+							value="#{msg['common.nequi.close.account.table.title']}"
+							style="text-align:center" />
+					</f:facet>
+
+					<p:column
+						headerText="#{msg['common.nequi.close.account.table.codigo']}"
+						width="70" style="text-align:center">
+						<h:outputText value="#{listClAcntReasonCode.valor}" />
+					</p:column>
+
+					<p:column
+						headerText="#{msg['common.nequi.close.account.table.description']}"
+						style="text-align:center">
+						<h:outputText value="#{listClAcntReasonCode.nombre}" />
+					</p:column>
+				</p:dataTable>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

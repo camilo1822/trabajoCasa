@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://nequi.co/message/integration/services/UpdateUserLDAPServices" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://nequi.co/message/integration/services/UpdateUserLDAPServices">
+
+    <element name="UpdateUserLDAPServiceRequest" type="tns:UpdateUserLDAPServiceRequestType"></element>
+
+    <complexType name="UpdateUserLDAPServiceRequestType">
+
+    	<choice>
+    		<element name="changeInfoLoginRQ" type="tns:ChangeInfoLoginRQType" minOccurs="1" maxOccurs="1"></element>
+    		<element name="changePasswordRQ" type="tns:ChangePasswordRQType" minOccurs="1" maxOccurs="1"></element>
+    	</choice>
+    </complexType>
+
+    <element name="UpdateUserLDAPServiceResponse" type="tns:UpdateUserLDAPServiceResponseType"></element>
+
+    <complexType name="UpdateUserLDAPServiceResponseType">
+    	<sequence>
+    		<element name="updateUserLDAPRS" type="tns:UpdateUserLDAPRSType"></element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="UpdateUserLDAPRQType">
+    	<sequence>
+    		<element name="phoneNumber" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="password" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="userId" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="requestType" type="string" minOccurs="1" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="UpdateUserLDAPRSType"></complexType>
+
+    <complexType name="ChangePasswordRQType">
+    	<sequence>
+    		<element name="phoneNumber" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="password" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="ChangeInfoLoginRQType">
+    	<sequence>
+    		<element name="phoneNumber" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="userId" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="requestType" type="string" minOccurs="1" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+</schema>

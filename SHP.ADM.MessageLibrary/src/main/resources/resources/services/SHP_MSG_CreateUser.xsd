@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.grupobancolombia.com/BandaDigital/services/UserManagementServices" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.grupobancolombia.com/BandaDigital/services/UserManagementServices">
+
+    <element name="CreateUserServiceRequest" type="tns:CreateUserServiceRequestType"></element>
+
+    <complexType name="CreateUserServiceRequestType">
+    	<sequence>
+    		<element name="createUserRQ" type="tns:CreateUserRQType"></element>
+    	</sequence>
+    </complexType>
+
+    <element name="CreateUserServiceResponse" type="tns:CreateUserServiceResponseType"></element>
+
+    <complexType name="CreateUserServiceResponseType">
+    	<sequence>
+    		<element name="createUserRS" type="tns:CreateUserRSType"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="CreateUserRSType"></complexType>
+
+    <complexType name="CreateUserRQType">
+    	<sequence>
+    		<element name="mail" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+
+    		<element name="names" type="string" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="lastName" type="string" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="cellphone" type="string" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="status" type="string" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="role" type="string" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="currentUser" type="string" maxOccurs="1" minOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</schema>

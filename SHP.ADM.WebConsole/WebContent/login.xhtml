@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Login</title>
+    <h:outputStylesheet name="./css/login.css"/>
+    <h:outputScript name="./js/login.js" />
+</h:head>
+
+<h:body>
+    <div class="conteiner" align="center">            
+            <h:form id="formLogin">
+                <p:growl id="growl" sticky="true" showDetail="true" life="1000" />
+                <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+            	<p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+				    <p:graphicImage name="/images/ajax-loader-login.gif" />
+				</p:dialog>
+                <p:panel id="basic" header="Ingresar Usuario y Contraseña" style="width: 350px; text-align: center ">                           
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <h:outputLabel class="label-user-name" for="username" value="Usuario:"/>
+                        <p:inputText id="username"  required="true" label="username" value="${loginMGBean.user.userName}" />
+
+                        <h:outputLabel for="password" value="Contraseña:" />
+                        <p:password id="password"  required="true" label="password" value="${loginMGBean.user.password}" />
+
+                        <f:facet name="footer">
+                            <div class="button-login">
+                                <p:commandButton value="Login" update="growl" actionListener="${loginMGBean.login()}"
+                                             oncomplete="handleLoginRequest(xhr, status, args)" />
+                            </div>
+                        </f:facet> 
+                    </h:panelGrid>
+                </p:panel>
+            </h:form>
+        </div>
+        <div align="center" class="footer-login">
+            <strong><h:outputLabel value="Web Administrativa Nequi" /></strong>
+        </div>
+</h:body>
+</html>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema
+	targetNamespace="http://www.grupobancolombia.com/BandaDigital/services/Backout/MassiveCloseAccount"
+	elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.grupobancolombia.com/BandaDigital/services/Backout/MassiveCloseAccount">
+
+
+	<element name="MassiveCloseAccountServiceRequest" type="tns:MassiveCloseAccountServiceRequestType"></element>
+
+	<complexType name="MassiveCloseAccountServiceRequestType">
+		<sequence>
+			<element name="massiveCloseAccountRQ" type="tns:MassiveCloseAccountRQType"></element>
+		</sequence>
+	</complexType>
+
+
+	<complexType name="MassiveCloseAccountRQType">
+		<sequence>
+			<element name="accountDetails" type="tns:AccountType"
+				maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="emailToNotify" type="string" maxOccurs="1" minOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="AccountType">
+		<sequence>
+			<element name="accounts" type="tns:AccountDetailType" maxOccurs="unbounded" minOccurs="0"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="AccountDetailType">
+		<sequence>
+			<element name="phoneNumber" type="string" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="reasonCode" type="string" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="reasonDescription" type="string" maxOccurs="1" minOccurs="1"></element>
+		</sequence>
+	</complexType>
+</schema>

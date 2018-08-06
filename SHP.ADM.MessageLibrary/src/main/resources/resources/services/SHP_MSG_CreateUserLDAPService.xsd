@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.grupobancolombia.com/BandaDigital/services/LiteRegistryService" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.grupobancolombia.com/BandaDigital/services/LiteRegistryService">
+
+
+
+
+
+
+
+
+    
+
+    
+
+
+
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+    <element name="CreateUserLDAPServiceRequest" type="tns:CreateUserLDAPServiceRequestType"></element>
+
+    <complexType name="CreateUserLDAPServiceRequestType">
+    	<sequence>
+    		<element name="createUserLDAPRQ" type="tns:CreateUserLDAPRQType" minOccurs="1" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="CreateUserLDAPRQType">
+    	<sequence>
+    		<element name="cifId" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="password" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="phoneNumber" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="email" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="nickName" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <element name="CreateUserLDAPServiceResponse" type="tns:CreateUserLDAPServiceResponseType"></element>
+
+    <complexType name="CreateUserLDAPServiceResponseType">
+    	<sequence>
+    		<element name="createClientLDAPRS" type="tns:createUserLDAPRSType"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="createUserLDAPRSType"></complexType>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</schema>

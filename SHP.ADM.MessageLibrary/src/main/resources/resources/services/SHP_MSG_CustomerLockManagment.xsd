@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.grupobancolombia.com/BandaDigital/services/UserServices" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.grupobancolombia.com/BandaDigital/services/UserServices">
+
+    <element name="CustomerLockManagmentServiceRequest" type="tns:CustomerLockManagmentServiceRequestType"></element>
+
+    <complexType name="CustomerLockManagmentServiceRequestType">
+    	<sequence>
+    		<element name="customerLockManagmentRQ" type="tns:CustomerLockManagmentRQType" minOccurs="1" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="CustomerLockManagmentRQType">
+    	<sequence>
+    		<element name="phoneNumber" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="lockType" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+
+    		<element name="action" type="string" minOccurs="1" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    <element name="CustomerLockManagmentServiceResponse" type="tns:CustomerLockManagmentServiceResponseType"></element>
+
+    <complexType name="CustomerLockManagmentServiceResponseType">
+    	<sequence>
+
+    		<element name="customerLockManagmentRS" type="tns:CustomerLockManagmentRSType" minOccurs="1" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="CustomerLockManagmentRSType"></complexType>
+</schema>

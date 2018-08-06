@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://nequi.co/message/bussines/services/"
+	elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://nequi.co/message/bussines/services/"
+	xmlns:Q1="http://nequi.co/message/bussines/services/getEnrollmentInformation"
+	xmlns:Q2="http://nequi.co/message/bussines/services/validateCustomer"
+	xmlns:Q3="http://nequi.co/message/bussines/services/protectedMsgService"
+	xmlns:Q4="http://nequi.co/message/bussines/services/calculateSarlaft"
+	xmlns:pref="http://nequi.co/message/bussines/services/uncheck"
+	xmlns:pref1="http://nequi.co/message/bussines/services/linkAccount" xmlns:pref2="http://nequi.co/message/bussines/services/operation">
+
+
+
+
+
+	<import schemaLocation="BS_MSG_OperationGMF.xsd" namespace="http://nequi.co/message/bussines/services/operation"></import>
+	<element name="requestMessage" type="tns:requestMessageType"></element>
+
+	<element name="responseMessage" type="tns:responseMessageType"></element>
+
+	<complexType name="requestMessageType">
+		<sequence>
+			<element name="header" type="tns:requestHeaderType"
+				minOccurs="1" maxOccurs="1">
+			</element>
+			<element name="body" type="tns:requestBodyType"
+				minOccurs="1" maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="responseMessageType">
+		<sequence>
+			<element name="header" type="tns:responseHeaderType"
+				minOccurs="1" maxOccurs="1">
+			</element>
+			<element name="body" type="tns:responseBodyType"
+				minOccurs="1" maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="requestHeaderType">
+		<sequence>
+			<element name="destination" type="tns:destinationType"
+				minOccurs="1" maxOccurs="1">
+			</element>
+			<element name="messageID" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="requestDate" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="channel" type="tns:channelType" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="consumer" type="tns:consumerType"
+				minOccurs="1" maxOccurs="1">
+			</element>
+			<element name="container" type="tns:containerType"
+				minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="security" type="tns:securityType"
+				minOccurs="0" maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+
+
+	<complexType name="securityType">
+		<sequence>
+			<element name="publicKey" type="string" minOccurs="0"
+				maxOccurs="1">
+			</element>
+			<element name="primeModulus" type="string" minOccurs="0"
+				maxOccurs="1">
+			</element>
+			<element name="baseGenerator" type="string" minOccurs="0"
+				maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="requestBodyType">
+		<choice>
+
+
+
+
+			<element ref="pref2:operationGMFRQ"></element>
+		</choice>
+	</complexType>
+
+	<complexType name="destinationType">
+		<sequence>
+			<element name="serviceName" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="serviceOperation" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="serviceRegion" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="serviceVersion" type="string" minOccurs="0"
+				maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="addressType">
+		<sequence>
+			<element name="deviceAddress" type="string" minOccurs="0"
+				maxOccurs="1">
+			</element>
+			<element name="networkAddress" type="string" minOccurs="0"
+				maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="channelType">
+		<sequence>
+			<element name="id" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="name" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="consumerType">
+		<sequence>
+			<element name="id" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="name" type="string" minOccurs="0"
+				maxOccurs="1">
+			</element>
+			<element name="address" type="tns:addressType" minOccurs="0"
+				maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="containerType">
+		<sequence>
+			<element name="id" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="name" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="responseHeaderType">
+		<sequence>
+			<element name="destination" type="tns:destinationType"
+				minOccurs="1" maxOccurs="1">
+			</element>
+			<element name="messageID" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="status" type="tns:statusType" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="responseDate" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="provider" type="tns:providerType"
+				minOccurs="1" maxOccurs="1">
+			</element>
+			<element name="container" type="tns:containerType"
+				minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="channel" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="consumer" type="tns:consumerType"
+				minOccurs="1" maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="responseBodyType">
+		<choice>
+
+
+
+			<element ref="pref2:operationGMFRS"></element>
+		</choice>
+	</complexType>
+
+	<complexType name="providerType">
+		<sequence>
+			<element name="id" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="name" type="string" minOccurs="0"
+				maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="statusType">
+		<sequence>
+			<element name="code" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="description" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+
+
+	<complexType name="messageRQType">
+		<sequence>
+			<element ref="tns:requestMessage"></element>
+		</sequence>
+	</complexType>
+
+
+	<complexType name="messageRSType">
+		<sequence>
+			<element ref="tns:responseMessage"></element>
+		</sequence>
+	</complexType>
+
+	<element name="messageRQ">
+		<complexType>
+			<sequence>
+				<element ref="tns:requestMessage"></element>
+			</sequence>
+		</complexType>
+	</element>
+
+	<element name="messageRS">
+		<complexType>
+			<sequence>
+				<element ref="tns:responseMessage"></element>
+			</sequence>
+		</complexType>
+	</element>
+</schema>

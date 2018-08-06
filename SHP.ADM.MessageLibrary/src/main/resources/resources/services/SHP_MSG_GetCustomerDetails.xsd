@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.grupobancolombia.com/BandaDigital/services/ResetPasswordServices" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.grupobancolombia.com/BandaDigital/services/ResetPasswordServices">
+	
+	
+	<!-- MENSAJERIA PARA CONSUMIR SERVICIO DE BROKER -->
+	<element name="GetCustomerStatusRequest" type="tns:GetCustomerStatusRequestType"></element>
+	<element name="GetCustomerStatusResponse" type="tns:GetCustomerStatusResponseType"></element>
+
+    <complexType name="GetCustomerStatusRequestType">
+    	<sequence>
+    		<element name="getCustomerStatusRQ" type="tns:GetCustomerStatusRQType"></element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="GetCustomerStatusRQType">
+    	<sequence>
+    		<element name="phoneNumber" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="document" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="bankId" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>  
+
+    <complexType name="GetCustomerStatusResponseType">
+    	<sequence>
+    		<element name="getCustomerStatusRS" type="tns:GetCustomerStatusRSType"></element>
+    	</sequence>
+    </complexType>   
+
+    <complexType name="GetCustomerStatusRSType">
+    	<sequence>
+    		<element name="cifId" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="fullName" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="preferredName" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="documentType" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="documentId" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="phoneNumber" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="emailId" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="foracId" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="acctOpnDate" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="acctStatus" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="schemeCode" type="string" maxOccurs="1" minOccurs="1"></element>
+    	</sequence>
+    </complexType>     
+    <!-- FIN --> 
+    
+    <!-- MENSAJERIA PARA CONSTRUIR REPORTE DE CERTIFICACIÓN BANCARIA -->
+    <complexType name="CustomerDetailsReport">
+    	<sequence>
+    		<element name="customerDetails" type="tns:CustomerDetailsReportType"></element>
+    	</sequence>
+    </complexType>  
+    
+    <complexType name="CustomerDetailsReportType">
+    	<sequence>
+    		<element name="fullName" type="string" minOccurs="1" maxOccurs="1"></element>    		
+    		<element name="documentType" type="string" minOccurs="1" maxOccurs="1"></element>
+    		<element name="document" type="string" minOccurs="1" maxOccurs="1"></element>    		
+    		<element name="accountNumber" type="string" minOccurs="1" maxOccurs="1"></element>
+    		<element name="accountStatus" type="string" minOccurs="1" maxOccurs="1"></element>
+    		<element name="accountOpnDate" type="string" minOccurs="1" maxOccurs="1"></element>
+    	</sequence>
+    </complexType> 
+</schema>

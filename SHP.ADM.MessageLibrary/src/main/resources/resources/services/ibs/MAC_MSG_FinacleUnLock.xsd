@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema
+	targetNamespace="http://www.grupobancolombia.com/BandaDigital/services/GetLockService"
+	elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.grupobancolombia.com/BandaDigital/services/GetLockService">
+
+	<element name="UnfreezeAccountResponse" type="tns:UnfreezeAccountResponseType"></element>
+
+	<complexType name="UnfreezeAccountResponseType">
+		<sequence>			
+		</sequence>
+	</complexType>
+
+
+	<element name="GetLockServiceRequest" type="tns:UnfreezeAccountRequestType"></element>
+
+	<complexType name="UnfreezeAccountRequestType">
+		<sequence>
+			<element name="unfreezeAccountRQ" type="tns:UnfreezeAccountRQ" minOccurs="1" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="UnfreezeAccountRQ">
+		<sequence>
+			<element name="accountNumber" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="reasonCode" type="string" minOccurs="1" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+</schema>

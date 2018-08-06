@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://nequi.co/message/bussines/services/operation"
+	elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://nequi.co/message/bussines/services/operation">
+    <element name="operationGMFRQ" type="tns:operationGMFRQType"></element>
+
+    <complexType name="operationGMFRQType">
+    	<sequence>
+    		<element name="accountNumber" type="string" minOccurs="1" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+    
+    <element name="operationGMFRS" type="tns:operationGMFRSType"></element>
+
+    <complexType name="operationGMFRSType"></complexType>
+</schema>

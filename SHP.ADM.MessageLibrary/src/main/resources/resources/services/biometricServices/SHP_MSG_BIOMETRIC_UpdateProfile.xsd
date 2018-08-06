@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.grupobancolombia.com/BandaDigital/services/UpdateProfile" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.grupobancolombia.com/BandaDigital/services/UpdateProfile">
+
+
+
+    <element name="UpdateProfileDaonServiceResponse" type="tns:UpdateProfileDaonServiceResponseType"></element>
+
+    <complexType name="UpdateProfileDaonServiceResponseType">
+    	<sequence>
+    		<element name="updateProfileDaonRS" type="tns:UpdateProfileDaonRSType" minOccurs="1" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="UpdateProfileDaonRSType"></complexType>
+
+    <element name="UpdateProfileDaonServiceRequest" type="tns:UpdateProfileDaonServiceRequestType"></element>
+
+    <complexType name="UpdateProfileDaonServiceRequestType">
+    	<sequence>
+    		<element name="updateProfileDaonRQ" type="tns:UpdateProfileDaonRQType"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="UpdateProfileDaonRQType">
+    	<sequence>
+    		<element name="phoneNumber" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="action" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="uuid" type="string" minOccurs="1" maxOccurs="1"></element>
+    		<element name="flagCreate" type="string" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="softToken" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="faceData" type="tns:FaceDataType"
+    			minOccurs="0" maxOccurs="1">
+    		</element>
+    		<element name="voiceData" type="tns:VoiceDataType"
+    			minOccurs="0" maxOccurs="unbounded">
+    		</element>
+    		<element name="model" type="string" minOccurs="0"
+    			maxOccurs="1">
+    		</element>
+    		<element name="manufacturer" type="string" minOccurs="0"
+    			maxOccurs="1">
+    		</element>
+    		<element name="versionSO" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="sistemaOperativo" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>   
+
+    <complexType name="FaceDataType">
+    	<sequence>
+    		<element name="data" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="imageType" type="string" minOccurs="1" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="VoiceDataType">
+    	<sequence>
+    		<element name="format" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="data" type="string" minOccurs="1" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+</schema>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema
+	targetNamespace="http://www.grupobancolombia.com/BandaDigital/services/SecurityServices"
+	elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.grupobancolombia.com/BandaDigital/services/SecurityServices">
+
+	<element name="ValidateCustomerListsServiceBrokerRequest"
+		type="tns:ValidateCustomerListsServiceBrokerRequestType"></element>
+
+	<complexType name="ValidateCustomerListsServiceBrokerRequestType">
+		<sequence>
+			<element name="validateCustomerListsBrokerRQ" type="tns:ValidateCustomerListsBrokerRQType"
+				minOccurs="1" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+	<element name="ValidateCustomerListsServiceBrokerResponse"
+		type="tns:ValidateCustomerListsServiceBrokerResponseType"></element>
+
+	<complexType name="ValidateCustomerListsServiceBrokerResponseType">
+		<sequence>
+			<element name="validateCustomerListsBrokerRS" type="tns:ValidateCustomerListsBrokerRSType"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="ValidateCustomerListsBrokerRQType">
+		<sequence>
+
+			<element name="typeId" type="string" minOccurs="1" maxOccurs="1">
+			</element>
+			<element name="idNumber" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="name1" type="string" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="name2" type="string" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="lastName1" type="string" minOccurs="0"
+				maxOccurs="1">
+			</element>
+			<element name="lastName2" type="string" minOccurs="0"
+				maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="ValidateCustomerListsBrokerRSType">
+		<sequence>
+			<element name="stateCode" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="description" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>		</sequence>
+	</complexType>
+
+	<element name="ValidateCustomerListsServiceRequest" type="tns:ValidateCustomerListsServiceRequestType"></element>
+
+	<complexType name="ValidateCustomerListsServiceRequestType">
+		<sequence>
+			<element name="validateCustomerListsRQ" type="tns:ValidateCustomerListsRQType"
+				minOccurs="1" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+	<element name="ValidateCustomerListsServiceResponse" type="tns:ValidateCustomerListsServiceResponseType"></element>
+
+	<complexType name="ValidateCustomerListsServiceResponseType">
+		<sequence>
+			<element name="validateCustomerListsRS" type="tns:ValidateCustomerListsRSType"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="ValidateCustomerListsRQType">
+
+		<sequence>
+			<element name="customerList" type="tns:CustomerType"
+				minOccurs="0" maxOccurs="unbounded"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="ValidateCustomerListsRSType">
+		<sequence>
+			<element name="customerList" type="tns:CustomerType"
+				minOccurs="0" maxOccurs="unbounded"></element>
+		</sequence>
+	</complexType>
+
+
+
+	<complexType name="CustomerType">
+		<sequence>
+			<element name="typeId" type="string" minOccurs="1" maxOccurs="1">
+			</element>
+			<element name="idNumber" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="names" type="string" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="lastNames" type="string" minOccurs="0"
+				maxOccurs="1"></element>
+			<element name="statusCode" type="string" minOccurs="0"
+				maxOccurs="1"></element>
+			<element name="description" type="string" minOccurs="0"
+				maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+
+
+</schema>

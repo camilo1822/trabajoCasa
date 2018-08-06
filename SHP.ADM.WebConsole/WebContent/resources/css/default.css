@@ -1,0 +1,217 @@
+body {
+    background-color: #ffffff;
+    font-size: 12px;
+    font-family: Verdana, "Verdana CE",  Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
+    color: #000000;  
+    margin: 10px;
+}
+
+h1 {
+    font-family: Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
+    border-bottom: 1px solid #AFAFAF; 
+    font-size:  16px;
+    font-weight: bold;
+    margin: 0px;
+    padding: 0px;
+    color: #D20005;
+}
+
+a:link, a:visited {
+  color: #045491;
+  font-weight : bold;
+  text-decoration: none;
+}
+
+a:link:hover, a:visited:hover  {
+  color: #045491;
+  font-weight : bold;
+  text-decoration : underline;
+}
+
+.form-close-account {
+   display: -webkit-box; 
+}
+
+.form-get-promotions {
+   display: -webkit-box; 
+}
+
+.outer-div-center {
+	width: 99%;
+}
+
+.createRuleStyle{
+	display: contents !important;
+}
+
+.inner-div-center {
+	width: 50%;
+  	margin: 0 auto;
+}
+
+.inner-div-center-promotions {
+  	margin: 0 auto;
+}
+
+.outputResarcimiento {
+  	display: none !important;
+}
+
+.form-close-account .reason-code-input {
+   width: 90%;
+}
+
+.logout {
+  display: block;
+  margin-left: 87%;
+}
+
+.clock {
+    text-align: -webkit-right;
+}
+
+.titleHeader {
+    display: block; 
+    text-align: -webkit-center;
+    margin-bottom: 0%;
+    margin-top: 0%;
+}
+
+.form-search-user {
+	width: 44%;
+	display: -webkit-inline-box;
+	margin-left: 28%;
+	margin-top: 4%;
+}
+
+.div-search-user {
+	display: -webkit-box;
+}
+
+.div-manage-profile {
+	display: -webkit-box;
+	margin-left: 4%;
+    margin-right: 4%;
+    margin-top: 3%;
+    background-color: white;
+    padding-left: 15%;
+    padding-top: 7%;
+    padding-bottom: 12%;
+}
+
+.div-get-promotions {
+	display: -webkit-box;
+	margin-left: 4%;
+    margin-right: 4%;
+    margin-top: 3%;
+    background-color: white;
+    padding-bottom: 12%;
+}
+
+.data-table-user-edit {
+    display: -webkit-inline-box;
+    margin-top: 2%;
+}
+
+.data-table-client-edit {
+	width: 96%;
+    display: -webkit-inline-box;
+    margin-top: 2%;
+    margin-left: 2%;
+}
+
+.form-buttons-reset-biometry {
+	width: 90%;
+    display: -webkit-inline-box;
+    margin-top: -1%;
+    margin-left: 6%;
+}
+
+.margin-left-button-clean-search {
+	margin-left: 3%;	
+}
+
+.div-data-table-list-user {
+	width: 90%;
+	padding-top: 2%;
+    padding-left: 5%;
+}
+
+.ui-state-default .icon-edit-user {
+    background-image: url(../images/editarUsuario.png);
+}
+
+.ui-state-default .icon-block-user {
+    background-image: url(../images/bloquear.png);
+}
+
+.ui-state-default .icon-create-user {
+    background-image: url(../images/agregarUsuario.png);
+    width: 50%;
+}
+
+.colum-action-user {
+	width:90px;
+	text-align: center;
+}
+
+.outputSelect{
+	width: 85% !important;
+}
+
+.div-form-create-user {
+	padding-left: 5%;
+    padding-top: 2%;
+}
+
+.outputlabel-bold {
+	font-weight: bold;
+}
+
+.botonExport .ui-button-icon-only .ui-icon{
+  left: 30% !important;
+  margin-left: -6px !important;
+}
+
+.botonExport .ui-button-icon-only .ui-icon, .ui-button-text-icon-left .ui-icon, .ui-button-text-icon-right .ui-icon{
+   position: absolute !important;
+  top: 43% !important;
+  margin-top: -8px !important;
+}
+
+.ui-state-default .icon-exportPDF{
+    background-image: url(../images/exportPDF.png);
+    width: 75% !important;
+    height: 75% !important;  
+}
+
+.ui-state-default .icon-exportCSV{
+    background-image: url(../images/exportCSV.png);
+    width: 75% !important;
+    height: 75% !important;  
+}
+
+.main-form-horizontally-center-aligned {
+   display: -webkit-box; 
+   left: 50%;
+   top: 22%;
+   padding-bottom: 20px;
+}
+
+.form-horizontally-center-aligned {
+   margin: 0 auto;
+}
+
+.main-form-style {
+	padding: 2% 0;
+}
+
+.data-table-biometry-verification-details {
+    display: -webkit-inline-box;
+    margin: 2% 0;
+}
+
+.button-delete-point {
+	text-align: right;
+	margin-top: 4px;
+}

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title></title>
+</h:head>
+
+<h:body>
+	<ui:composition template="./templateAdministrative.xhtml">
+		<ui:define name="content">
+			<p:ajaxStatus onstart="PF('statusDialog').show()"
+				onsuccess="PF('statusDialog').hide()" />
+			<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+				closable="false" resizable="false" showHeader="false">
+				<p:graphicImage name="/images/ajax-loader.gif" />
+			</p:dialog>
+			<div class="div-search-user"
+				style="margin-left: 30%; margin-top: 16%;">
+				<h:form id="formNequiPoints" enctype="multipart/form-data">
+					<p:growl id="growl" sticky="true" showDetail="true" life="1000" />
+					<p:panel id="basic"
+						header="#{msg['common.nequi.points.form.title']}">
+						<h:panelGrid columns="2" cellpadding="2"
+							rendered="#{nequiPointMGBean.permissionRol.write == 1}">
+							<h:outputText styleClass="outputlabel-bold"
+								value="#{msg['common.nequi.points.form.pointstypes']}" />
+							<p:selectOneMenu id="selectPoints" value="#{nequiPointMGBean.namePointType}"
+								label="#{nequiPointMGBean.namePointType}" styleClass="reason-code-input"
+								style="width: 85%;">
+								<f:selectItem itemLabel="- #{msg['common.select']} -"
+									itemValue="" />
+								<f:selectItems
+									value="#{nequiPointMGBean.selectOneItemPointsTypes}" />
+							</p:selectOneMenu>
+						</h:panelGrid>
+						<h:panelGrid columns="1" width="100%" cellpadding="2"
+							rendered="#{nequiPointMGBean.permissionRol.write == 1}">
+							<h:outputLabel value="#{msg['control.list.upload.title']}"
+								style="font-weight:bold" />
+							<p:fileUpload value="#{nequiPointMGBean.file2}" process="@this"
+								fileUploadListener="#{nequiPointMGBean.loadData}"
+								label="#{msg['common.select.action']}"
+								uploadLabel="#{msg['common.upload']}"
+								cancelLabel="#{msg['common.form.button.cancel']}"
+								mode="advanced" dragDropSupport="false" sizeLimit="1000000"
+								fileLimit="20" allowTypes="/(\.|\/)(csv)$/" update="growl" />
+						</h:panelGrid>
+						<div class="button-delete-point">
+							<p:commandButton id="btnDeleteFile" icon="fa fa-fw fa-trash-o"
+								update="growl"
+								title="#{msg['common.nequi.points.form.button.delete']}"
+								value="#{msg['common.nequi.points.form.button.delete']}"
+								actionListener="#{nequiPointMGBean.deleteFile()}" />
+						</div>
+					</p:panel>
+				</h:form>
+			</div>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

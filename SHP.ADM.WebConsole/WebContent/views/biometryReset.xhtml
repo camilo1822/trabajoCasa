@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title></title>
+</h:head>
+
+<h:body>
+    <ui:composition template="./templateAdministrative.xhtml">
+            <ui:define name="content">
+            	<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+            	<p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+				    <p:graphicImage name="/images/ajax-loader.gif" />
+				</p:dialog>	
+				<p:growl id="growl" sticky="true" showDetail="true" life="1000" />
+				<h:form id="formBiometryReset">
+                    <div class="main-form-style main-form-horizontally-center-aligned">
+                        <p:panel id="basic" header="#{msg['biometry.reset.form.header']}" styleClass="form-horizontally-center-aligned">
+                            <h:panelGrid columns="2" cellpadding="2">
+
+                                <h:outputLabel for="phoneNumber" value="#{msg['common.nequi.biometry.verification.form.number']}" style="font-weight:bold"/>
+                                <p:inputText id="phoneNumber" label="phoneNumber" value="#{biometryResetMGBean.phoneNumber}" onkeypress="return justNumbers(event);"/>
+                                
+                                <f:facet name="footer">
+                                     <p:separator/>
+                                     <p:commandButton rendered="#{biometryResetMGBean.permissionRol.read ==1}" id="btnSearchBiometryResetDetails" actionListener="#{biometryResetMGBean.getUrlImageEnrolOld()}" update="growl, :formImgEnrol, :formListAttempts, :formActionButton" icon="fa fa-fw fa-search" title="#{msg['common.search']}" value="#{msg['common.search']}"/>
+                                     <p:commandButton process="@this" update="formBiometryReset, :formImgEnrol, :formListAttempts, :formActionButton" actionListener="#{biometryResetMGBean.cleanFormBiometryReset()}" icon="ui-icon-trash" value="#{msg['common.form.button.clean']}" title="#{msg['common.form.button.clean']}"/>
+                                     <p:commandButton id="btnRefreshImg" actionListener="#{biometryResetMGBean.refreshNewImageEnrol()}" update="growl, :formImgEnrol, :formActionButton" icon="fa fa-fw fa-refresh" title="#{msg['biometry.reset.form.refresh.img']}" value="#{msg['biometry.reset.form.refresh.img']}"/>
+                                 </f:facet>
+                            </h:panelGrid>
+                        </p:panel>
+                    </div>
+                </h:form>
+                <h:form id="formImgEnrol">
+	                <p:fieldset legend="#{msg['biometry.reset.fielsed.legend']}"  toggleable="true" toggleSpeed="500">
+				        <h:panelGrid columns="2" cellpadding="5">
+				        	<h:graphicImage value="data:image/jpg;base64,#{biometryResetMGBean.urlImgEnrolOld}"  width="350" height="370" rendered="#{biometryResetMGBean.urlImgEnrolOld ne ''}"/>
+				            <h:graphicImage style="padding-left: 10%;" value="data:image/jpg;base64,#{biometryResetMGBean.urlImgEnrolNew}" width="350" height="370" rendered="#{biometryResetMGBean.urlImgEnrolNew ne ''}"/>
+				        </h:panelGrid>
+				    </p:fieldset>
+			    </h:form>
+			    <h:form id="formListAttempts" class="data-table-user-edit">
+				    <p:dataTable id="listTable" var="list" value="#{biometryResetMGBean.listAttemps}" editable="true" style="margin-bottom:20px"
+				                 paginator="true" rows="5" paginatorPosition="bottom">
+				       <f:facet name="header">
+				            <h:outputText value="#{msg['biometry.reset.form.list.header']}" style="text-align:center;"/>
+				       </f:facet>
+				 
+				       <p:column headerText="#{msg['biometry.verification.table.estado']}" style="text-align:center;">
+				               <h:outputText value="#{list.status}"/>
+				       </p:column>
+				 
+				       <p:column headerText="#{msg['biometry.verification.table.fecha']}" style="text-align:center;">
+				               <h:outputText value="#{list.date}"/>
+				       </p:column>
+				    </p:dataTable>
+			   </h:form> 
+			   <h:form id="formActionButton" class="form-buttons-reset-biometry">
+			   		<p:commandButton rendered="#{biometryResetMGBean.showFirstButton and biometryResetMGBean.permissionRol.write ==1}" update="growl" id="btnSendPush" actionListener="#{biometryResetMGBean.sendPushBiometryReset()}" icon="fa fa-fw fa-send-o" title="#{msg['common.nequi.biometry.verification.label.sendpush']}" value="#{msg['common.nequi.biometry.verification.label.sendpush']}" />
+			   		<p:commandButton rendered="#{biometryResetMGBean.showFirstButton and biometryResetMGBean.permissionRol.write ==1}" update="growl" id="btnResetWithout" actionListener="#{biometryResetMGBean.resetWithoutOTP()}" icon="fa fa-fw fa-wrench" title="#{msg['biometry.reset.form.button.reset.without.OTP']}" value="#{msg['biometry.reset.form.button.reset.without.OTP']}" />
+			   		<p:commandButton rendered="#{biometryResetMGBean.showFirstButton and biometryResetMGBean.showLastButton and biometryResetMGBean.permissionRol.write ==1}" update="growl, :formBiometryReset, :formImgEnrol, :formListAttempts, :formActionButton" id="btnUpdateNewBiometry"  actionListener="#{biometryResetMGBean.updateNewBiometryApprove()}" icon="fa fa-fw fa-check-circle" title="#{msg['biometry.reset.form.button.new.biometry']}" value="#{msg['biometry.reset.form.button.new.biometry']}" />
+			   		<p:commandButton rendered="#{biometryResetMGBean.showFirstButton and biometryResetMGBean.showLastButton and biometryResetMGBean.permissionRol.write ==1}" update="growl, :formBiometryReset, :formImgEnrol, :formListAttempts, :formActionButton" id="btnBlockAccount"  actionListener="#{biometryResetMGBean.blockClient()}" icon="fa fa-fw fa-ban" title="#{msg['biometry.reset.form.button.block.account']}" value="#{msg['biometry.reset.form.button.block.account']}" />
+			   </h:form>
+            </ui:define>
+     </ui:composition>
+</h:body>
+</html>

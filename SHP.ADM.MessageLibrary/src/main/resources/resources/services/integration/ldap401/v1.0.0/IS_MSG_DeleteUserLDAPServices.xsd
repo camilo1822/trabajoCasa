@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema
+	targetNamespace="http://nequi.co/message/integration/services/DeleteUserLDAPServices"
+	elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://nequi.co/message/integration/services/DeleteUserLDAPServices">
+
+	<element name="DeleteUserLDAPServiceRequest" type="tns:DeleteUserLDAPServiceRequestType"></element>
+
+	<complexType name="DeleteUserLDAPServiceRequestType">
+		<sequence>
+			<element name="deleteUserLDAPRQ" type="tns:DeleteUserLDAPRQType"></element>
+		</sequence>
+	</complexType>
+
+	<element name="DeleteUserLDAPServiceResponse" type="tns:DeleteUserLDAPServiceResponseType"></element>
+
+	<complexType name="DeleteUserLDAPServiceResponseType">
+		<sequence>
+			<element name="deleteUserLDAPRS" type="tns:DeleteUserLDAPRSType"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="DeleteUserLDAPRQType">
+		<sequence>
+			<element name="cifId" type="string" minOccurs="1" maxOccurs="1">
+			</element>
+			<element name="phoneNumber" type="string" minOccurs="1"
+				maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="DeleteUserLDAPRSType"></complexType>
+</schema>

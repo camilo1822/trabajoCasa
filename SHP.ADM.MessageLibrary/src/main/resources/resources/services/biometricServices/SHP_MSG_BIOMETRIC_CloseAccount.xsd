@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.grupobancolombia.com/BandaDigital/services/CloseAccount" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.grupobancolombia.com/BandaDigital/services/CloseAccount">
+
+
+    <element name="CloseAccountDaonServiceResponse" type="tns:CloseAccountDaonServiceResponseType"></element>
+
+    
+    <complexType name="CloseAccountDaonServiceResponseType">
+    	<sequence>
+    		<element name="closeAccountDaonRS" type="tns:CloseAccountDaonRSType"></element>
+    	</sequence>
+    </complexType>
+    
+
+    <complexType name="CloseAccountDaonRSType"></complexType>
+
+    <element name="CloseAccountDaonBrokerServiceRequest" type="tns:CloseAccountDaonBrokerServiceRequestType"></element>
+
+    <complexType name="CloseAccountDaonBrokerServiceRequestType">
+    	<sequence>
+    		<element name="closeAccountDaonBrokerRQ" type="tns:CloseAccountDaonBrokerRQType"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="CloseAccountDaonBrokerRQType">
+    	<sequence>
+    		<element name="phoneNumber" type="string" minOccurs="1" maxOccurs="1"></element>
+    		<element name="cifid" type="string" minOccurs="1" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+</schema>

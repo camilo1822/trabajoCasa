@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema
+	targetNamespace="http://nequi.co/message/integration/services/AddPromotionAudit"
+	elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://nequi.co/message/integration/services/AddPromotionAudit">
+
+	<element name="addPromotionAuditRequest" type="tns:AddPromotionAuditRequestType"></element>
+
+	<complexType name="AddPromotionAuditRequestType">
+		<sequence>
+			<element name="ruleId" type="string" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="clientId" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="typeId" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+
+			<element name="identification" type="string" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="phoneNumber" type="string" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="value" type="string" maxOccurs="1"
+				minOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+
+
+	<element name="addPromotionAuditResponse"
+		type="tns:AddPromotionAuditResponseType">
+	</element>
+
+
+
+
+	
+    <complexType name="AddPromotionAuditResponseType"></complexType>
+</schema>

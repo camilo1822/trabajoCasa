@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema
+	targetNamespace="http://www.grupobancolombia.com/BandaDigital/services/Backout/CompensatePhoneNumber"
+	elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.grupobancolombia.com/BandaDigital/services/Backout/CompensatePhoneNumber">
+
+	<element name="CompensatePhoneNumberServiceRequest" type="tns:CompensatePhoneNumberServiceRequestType"></element>
+
+	<complexType name="CompensatePhoneNumberServiceRequestType">
+		<sequence>
+			<element name="compensatePhoneNumberRQ" type="tns:CompensatePhoneNumberRQType"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="CompensatePhoneNumberRQType">
+		<sequence>
+			<element name="phoneNumber" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="oldPhoneNumber" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="cifId" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="phoneEmailID" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="type" type="string" maxOccurs="1" minOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+</schema>

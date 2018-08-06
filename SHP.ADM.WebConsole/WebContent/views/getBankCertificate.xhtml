@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title></title>
+</h:head>
+
+<h:body>
+	<ui:composition template="./templateAdministrative.xhtml">
+		<ui:define name="content">
+			<p:growl id="growl" sticky="true" showDetail="true" life="1000" />
+			<p:ajaxStatus onstart="PF('statusDialog').show()"
+				onsuccess="PF('statusDialog').hide()" />
+			<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+				closable="false" resizable="false" showHeader="false">
+				<p:graphicImage name="/images/ajax-loader.gif" />
+			</p:dialog>
+			<div class="div-manage-profile">
+				<p:tabView id="tabManageProfile">
+					<p:tab title="#{msg['get.certificate.tabview.get']}">
+						<p:outputPanel deferred="true">
+									<p:panel header="#{msg['get.certificate.panel.get']}">
+										<p:messages />
+										<h:form id="formSearch">
+											<h:panelGrid columns="2" columnClasses="label, value">
+												<h:outputText styleClass="outputlabel-bold"
+													value="#{msg['get.certificate.input.text']}" />
+												<p:inputText id="input"
+													value="#{getCertificateMGBean.document}"
+													label="#{msg['get.certificate.input.text']}"
+													required="true" />
+												<h:commandButton
+													value="#{msg['get.certificate.button.download']}"
+													actionListener="#{getCertificateMGBean.downloadPdf}"
+													style="margin-top: 4%;">
+												</h:commandButton>
+
+
+											</h:panelGrid>
+										</h:form>
+									</p:panel>
+								
+						</p:outputPanel>
+					</p:tab>
+				</p:tabView>
+			</div>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

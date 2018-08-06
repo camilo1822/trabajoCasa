@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema
+	targetNamespace="http://www.grupobancolombia.com/BancaDigital/services/SlackNotification"
+	elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.grupobancolombia.com/BancaDigital/services/SlackNotification">
+
+	<element name="SlackNotificationServiceRequest" type="tns:SlackNotificationServiceRequestType"></element>
+
+	<element name="SlackNotificationServiceResponse" type="tns:SlackNotificationServiceResponseType"></element>
+
+	<complexType name="SlackNotificationServiceRequestType">
+		<sequence>
+			<element name="slackNotificationRQ" type="tns:SlackNotificationRQType"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="SlackNotificationRQType">
+		<sequence>
+			<element name="channel" type="string" minOccurs="1"
+				maxOccurs="1"></element>
+			<element name="text" type="string" minOccurs="1" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="SlackNotificationServiceResponseType">
+		<sequence>
+			<element name="slackNotificationRS" type="tns:SlackNotificationRSType"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="SlackNotificationRSType"></complexType>
+</schema>

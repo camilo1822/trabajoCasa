@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://nequi.co/message/registry/ServiceRegistry" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://nequi.co/message/registry/ServiceRegistry" xmlns:Q1="http://nequi.co/message/registry/ServiceRegistry/lookup">
+
+    <import schemaLocation="RegistryLookup.xsd" namespace="http://nequi.co/message/registry/ServiceRegistry/lookup"></import>
+    <annotation>
+    	<documentation>Firma para Operaciones de Service Lookup</documentation></annotation>
+    <element name="registryRQ">
+    	<complexType>
+    		<sequence>
+    			<element ref="tns:registryRequest"></element>
+    		</sequence>
+    	</complexType></element>
+
+    <element name="registryRS">
+    	<complexType>
+    		<sequence>
+    			<element ref="tns:registryResponse"></element>
+    		</sequence>
+    	</complexType></element>
+
+    <element name="registryRequest" type="tns:RegistryRequestType"></element>
+
+    <element name="registryResponse" type="tns:RegistryResponseType"></element>
+
+    <complexType name="RegistryResponseType">
+    	<sequence>
+    		<element name="header" type="tns:headerResponseType" minOccurs="1" maxOccurs="1"></element>
+    		<element name="body" type="tns:bodyResponseType" minOccurs="1" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="RegistryRequestType">
+    	<sequence>
+    		<element name="header" type="tns:headerRequestType" minOccurs="1" maxOccurs="1"></element>
+    		<element name="body" type="tns:bodyRequestType" minOccurs="1" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="headerRequestType">
+    	<sequence>
+    		<element name="messageId" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="messageDate" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="consumer" type="tns:consumerType"
+    			minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="type" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="operation" type="string" minOccurs="1" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="bodyRequestType">
+    	<choice>
+    		<element ref="Q1:lookupRequest"></element>
+    	</choice>
+    </complexType>
+
+    <complexType name="consumerType">
+    	<sequence>
+    		<element name="id" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+            <element name="name" type="string" minOccurs="1" maxOccurs="1"></element>
+            <element name="container" type="tns:containerType"
+    			minOccurs="0" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+    
+
+    <complexType name="containerType">
+    	<sequence>
+    		<element name="id" type="string" minOccurs="1" maxOccurs="1"></element>
+    		<element name="name" type="string" minOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+
+    <complexType name="headerResponseType">
+    	<sequence>
+    		<element name="messageId" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="responseDate" type="string" minOccurs="1" maxOccurs="1"></element>
+    		<element name="status" type="tns:statusType" minOccurs="1" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="bodyResponseType">
+    	<choice>
+    		<element ref="Q1:lookupResponse"></element>
+    	</choice>
+    </complexType>
+
+    <complexType name="statusType">
+    	<sequence>
+    		<element name="code" type="string" minOccurs="1" maxOccurs="1"></element>
+    		<element name="description" type="string" minOccurs="1" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+    
+
+
+
+</schema>

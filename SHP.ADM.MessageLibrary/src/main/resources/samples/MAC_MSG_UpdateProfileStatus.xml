@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:UpdateProfileStatusRequest xmlns:tns="http://www.grupobancolombia.com/BandaDigital/services/GetCustomerLocksService" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.grupobancolombia.com/BandaDigital/services/GetCustomerLocksService ../resources/services/MAC_MSG_UpdateProfileStatus.xsd ">
+  <tns:updateProfileStatusRQ>
+    <tns:phoneNumber>tns:phoneNumber</tns:phoneNumber>
+    <tns:isProfileBlocked>tns:isProfileBlocked</tns:isProfileBlocked>
+  </tns:updateProfileStatusRQ>
+</tns:UpdateProfileStatusRequest>

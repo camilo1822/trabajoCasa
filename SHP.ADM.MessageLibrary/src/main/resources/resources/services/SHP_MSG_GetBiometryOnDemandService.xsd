@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/SHP_MSG_GetBiometryOnDemandService" xmlns:tns="http://www.example.org/SHP_MSG_GetBiometryOnDemandService" elementFormDefault="qualified">
+
+    <element name="GetBiometryOnDemandServiceRequest" type="tns:GetBiometryOnDemandServiceRequestType"></element>
+
+    <complexType name="GetBiometryOnDemandServiceRequestType">
+    	<sequence>
+    		<element name="getBiometryOnDemandRQ" type="tns:GetBiometryOnDemandRQType"></element>
+    	</sequence>
+    </complexType>
+    
+    <element name="GetBiometryOnDemandServiceResponse" type="tns:GetBiometryOnDemandServiceResponseType"></element>
+
+    <complexType name="GetBiometryOnDemandServiceResponseType">
+    	<sequence>
+    		<element name="getBiometryOnDemandRS" type="tns:GetBiometryOnDemandRSType"></element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="GetBiometryOnDemandRQType">
+    	<sequence>
+    		<element name="phoneNumber" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="maxResult" type="string" maxOccurs="1" minOccurs="0"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="GetBiometryOnDemandRSType">
+    	<sequence>
+    		<element name="data" type="tns:DataType" minOccurs="0" maxOccurs="unbounded"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="DataType">
+    	<sequence>
+    		<element name="deviceId" type="string"></element>
+    		<element name="fecha" type="string"></element>
+    		<element name="estado" type="string"></element>
+
+    		<element name="resultado" type="string"></element>
+
+    		<element name="url" type="string"></element>
+    		<element name="tipo" type="string"></element>
+    	</sequence>
+    </complexType>
+</schema>

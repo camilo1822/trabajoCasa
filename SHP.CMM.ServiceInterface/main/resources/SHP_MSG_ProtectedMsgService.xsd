@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.grupobancolombia.com/BandaDigital/services/ProtectedMsgService" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.grupobancolombia.com/BandaDigital/services/ProtectedMsgService">
+
+    <element name="ProtectedMsgServiceRequest" type="tns:ProtectedMsgServiceRequestType"></element>
+
+    <complexType name="ProtectedMsgServiceRequestType">
+    	<sequence>
+    		<element name="protectedMsgRQ" type="tns:ProtectedMsgRQType" minOccurs="1" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+    
+    <element name="ProtectedMsgServiceResponse" type="tns:ProtectedMsgServiceResponseType"></element>
+
+    <complexType name="ProtectedMsgServiceResponseType">
+    	<sequence>
+    		<element name="protectedMsgRS" type="tns:ProtectedMsgRSType" minOccurs="1" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="ProtectedMsgRQType">
+    	<sequence>
+    		<element name="phoneNumber" type="string" minOccurs="1" maxOccurs="1"></element>
+    		<element name="type" type="string" minOccurs="1" maxOccurs="1"></element>
+            <element name="info" type="string" minOccurs="1" maxOccurs="1"></element>
+        </sequence>
+    </complexType>
+
+    <complexType name="ProtectedMsgRSType">
+    	<sequence>
+    		<element name="type" type="string" minOccurs="1" maxOccurs="1"></element>
+    		<element name="info" type="string" minOccurs="1" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+</schema>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+    <h:head>
+    	<title></title>
+	</h:head>
+	<h:body>
+		<ui:composition template="./templateAdministrative.xhtml">
+			<ui:define name="content">
+				<p:growl id="growl" sticky="true" showDetail="true" life="1000" />
+				<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+            	<p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+				    <p:graphicImage name="/images/ajax-loader.gif" />
+				</p:dialog>
+				<h:form>
+					<div class="div-form-create-user">
+						<p:commandButton id="btnUsuarioCreate" actionListener="#{userMGBean.redirectCreateUser()}" icon="icon-create-user" title="#{msg['manage.user.common.create.user']}" value="#{msg['manage.user.common.create.user']}" rendered="#{userMGBean.permissionRol.write ==1}"/>
+					</div>
+				</h:form>
+				<h:form id="formListUser">
+					<div class="div-data-table-list-user">
+						<p:dataTable id="userDataTable" var="user" value="#{userMGBean.listUser}"
+	                     paginator="true" rows="10" paginatorPosition="bottom" widgetVar="userTable"
+	                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rendered="#{userMGBean.permissionRol.read ==1}">
+	                     	<f:facet name="header">
+	                          <h:outputText value="#{msg['manage.user.list.title']}"/>
+	                      	</f:facet>
+        
+	                      	<p:column headerText="#{msg['manage.user.common.name']}">
+	                          <h:outputText value="#{user.nombres}" />
+	                      	</p:column>
+	                      	<p:column headerText="#{msg['manage.user.common.last.name']}">
+	                          <h:outputText value="#{user.apellidos}" />
+	                      	</p:column>
+	                      	<p:column headerText="#{msg['manage.user.common.rol']}">
+	                          <h:outputText value="#{user.awRol.nombre}" />
+	                      	</p:column>
+	                      	<p:column headerText="#{msg['manage.user.common.email']}">
+	                          <h:outputText value="#{user.mail}" />
+	                      	</p:column>
+	                      	<p:column headerText="#{msg['manage.user.column.action']}" styleClass="colum-action-user" rendered="#{userMGBean.permissionRol.write ==1}">
+	                      		<p:commandButton id="btnUpdate" update=":formUpdateUser" oncomplete="PF('dialogUserUpdate').show()" actionListener="#{userMGBean.editUser(user)}" icon="icon-edit-user" title="#{msg['manage.user.button.title.edit']}" style="background: #add5f7;margin-right: 12%;">
+	                          	</p:commandButton>
+	                          	<p:commandButton id="btnBlock" update=":formDelete" icon="icon-block-user" title="#{msg['manage.user.button.title.block']}" style="background: #add5f7;"
+	                          					 oncomplete="PF('dialogUsuarioDelete').show()">
+	                      			<f:setPropertyActionListener value="#{user}" target="#{userMGBean.selectedUser}" />
+	                         	</p:commandButton>
+	                      	 </p:column>
+	                     </p:dataTable>
+	            	</div>         
+				</h:form>
+				<h:form id="formUpdateUser">
+					<p:dialog header="#{msg['manage.user.modify.user.title']}"  widgetVar="dialogUserUpdate" closeOnEscape="true" modal="true" id="dlgUserUpdate" showEffect="fade" hideEffect="explode" resizable="false">
+						 <p:ajax event="close" listener="#{userMGBean.resetEditUserDialog()}"/>
+						 <h:panelGrid  id="display" columns="2" cellpadding="4" style="margin:0 auto;">
+						 	 <h:outputText value="#{msg['manage.user.form.name']}" styleClass="outputlabel-bold"/>
+	                         <p:inputText value="#{userMGBean.firstNameToUpdate}" required="true" label="#{msg['manage.user.form.name']}" ><f:validateLength maximum="60" /></p:inputText>
+	                         
+	                         <h:outputText value="#{msg['manage.user.form.last.name']}" styleClass="outputlabel-bold"/>
+	                         <p:inputText value="#{userMGBean.lastNameToUpdate}" required="true" label="#{msg['manage.user.form.last.name']}"><f:validateLength maximum="60" /></p:inputText>
+	                         
+	                         <h:outputText value="#{msg['manage.user.form.rol']}" styleClass="outputlabel-bold"/>
+	                         <p:selectOneMenu  value="#{userMGBean.rolToUpdate}" style="width: 85%;">
+	                             <f:selectItems value="#{userMGBean.selectOneItemRol}" />
+	                         </p:selectOneMenu>
+	                                            
+	                         <h:outputText value="#{msg['manage.user.form.status']}" styleClass="outputlabel-bold"/>
+	                         <p:selectOneMenu  value="#{userMGBean.userStatusToUpdate}" style="width: 85%;">
+	                             <f:selectItems value="#{userMGBean.selectOneItemStatus}" />
+	                         </p:selectOneMenu>
+	                         <h:inputHidden value="#{userMGBean.mailUserToUpdate}"/>  
+	                         
+	                         <f:facet name="footer">
+                                  <p:separator/>
+                                  <p:commandButton id="btnModifyUser" actionListener="#{userMGBean.updateUser()}" update=":formListUser, :growl" oncomplete="if (args &amp;&amp; !args.validationFailed) PF('dialogUserUpdate').hide()" icon="ui-icon-check" 
+                                  				   title="#{msg['common.form.button.modify']}" value="#{msg['common.form.button.modify']}"/>
+                                  <p:commandButton id="btnCancel" oncomplete="PF('dialogUserUpdate').hide()" icon="ui-icon-close" title="#{msg['common.form.button.cancel']}" value="#{msg['common.form.button.cancel']}"/>
+                              </f:facet>
+						 </h:panelGrid>
+					</p:dialog>
+				</h:form>
+				<h:form id="formDelete">
+                  <p:confirmDialog id="confirmDialog" showEffect="fade" hideEffect="explode" message="#{msg['manage.user.block.content']}" header="#{msg['manage.user.block.title']}" severity="alert" widgetVar="dialogUsuarioDelete" closeOnEscape="true">   
+                      <h:inputHidden value="#{userMGBean.selectedUser.mail}"/>   
+                      <p:commandButton id="confirm" value="#{msg['common.button.ok']}" update=":formListUser, :growl" icon="ui-icon-check" oncomplete="PF('dialogUsuarioDelete').hide()" actionListener="#{userMGBean.deleteUser()}" />
+                      <p:commandButton id="decline" value="#{msg['common.button.cancel']}" type="button" icon="ui-icon-close" onclick="PF('dialogUsuarioDelete').hide()" />
+                  </p:confirmDialog>    
+              </h:form>
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</html>

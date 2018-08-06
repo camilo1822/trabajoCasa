@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema
+	targetNamespace="http://www.grupobancolombia.com/BandaDigital/services/GetCustomerLocksService"
+	elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.grupobancolombia.com/BandaDigital/services/GetCustomerLocksService">
+
+	<element name="UpdateProfileStatusResponse" type="tns:UpdateProfileStatusResponseType"></element>
+
+	<complexType name="UpdateProfileStatusResponseType">
+		<sequence>
+			<element name="updateProfileStatusRS" type="tns:UpdateProfileStatusRSType"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="UpdateProfileStatusRSType">
+		<sequence>
+			
+		</sequence>
+	</complexType>
+
+	<element name="UpdateProfileStatusRequest" type="tns:UpdateProfileStatusRequestType"></element>
+
+	<complexType name="UpdateProfileStatusRequestType">
+		<sequence>
+			<element name="updateProfileStatusRQ" type="tns:UpdateProfileStatusRQType"
+				minOccurs="1" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="UpdateProfileStatusRQType">
+		<sequence>
+			<element name="phoneNumber" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="isProfileBlocked" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+	
+</schema>

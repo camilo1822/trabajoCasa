@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.grupobancolombia.com/BandaDigital/services/MarkFinacle" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.grupobancolombia.com/BandaDigital/services/MarkFinacle">
+
+    <element name="MarkFinacleServiceResponse" type="tns:MarkFinacleServiceResponseType"></element>
+
+    <element name="MarkFinacleServiceRequest" type="tns:MarkFinacleServiceRequestType"></element>
+
+    <complexType name="MarkFinacleServiceRequestType">
+    	<sequence>
+    		<element name="markFinacleRQ" type="tns:MarkFinacleRQType" minOccurs="1" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="MarkFinacleServiceResponseType">
+    	<sequence>
+    		<element name="markFinacleRS" type="tns:MarkFinacleRSType" minOccurs="1" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="MarkFinacleRQType">
+    	<sequence>
+    		<element name="phoneNumber" type="string" minOccurs="1"></element>
+    		<element name="inactiveDate" type="string" minOccurs="1" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="MarkFinacleRSType"></complexType>
+</schema>

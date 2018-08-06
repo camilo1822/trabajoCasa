@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.grupobancolombia.com/BandaDigital/services/UserManagementServices" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.grupobancolombia.com/BandaDigital/services/UserManagementServices">
+
+    <element name="UpdateUserServiceRequest" type="tns:UpdateUserServiceRequestType"></element>
+
+    <complexType name="UpdateUserServiceRequestType">
+    	<sequence>
+    		<element name="updateUserRQ" type="tns:UpdateUserRQType"></element>
+    	</sequence>
+    </complexType>
+
+    <element name="UpdateUserServiceResponse" type="tns:UpdateUserServiceResponseType"></element>
+
+    <complexType name="UpdateUserServiceResponseType">
+    	<sequence>
+    		<element name="updateUserRS" type="tns:UpdateUserRSType"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="UpdateUserRSType"></complexType>
+
+    <complexType name="UpdateUserRQType">
+    	<sequence>
+    		<element name="mail" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+
+    		<element name="names" type="string" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="lastName" type="string" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="status" type="string" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="role" type="string" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="currentUser" type="string" maxOccurs="1" minOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</schema>

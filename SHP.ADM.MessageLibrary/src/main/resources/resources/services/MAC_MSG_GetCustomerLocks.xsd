@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema
+	targetNamespace="http://www.grupobancolombia.com/BandaDigital/services/GetCustomerLocksService"
+	elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.grupobancolombia.com/BandaDigital/services/GetCustomerLocksService">
+
+	<element name="GetCustomerLocksServiceResponse" type="tns:GetCustomerLocksServiceResponseType"></element>
+
+	<complexType name="GetCustomerLocksServiceResponseType">
+		<sequence>
+			<element name="getCustomerLocksRS" type="tns:GetCustomerLocksRSType"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="GetCustomerLocksRSType">
+		<sequence>
+			<element name="cifId" type="string" minOccurs="1" maxOccurs="1">
+			</element>
+			<element name="firstName" type="string" maxOccurs="1"
+				minOccurs="0"></element>
+			<element name="lastName" type="string" maxOccurs="1"
+				minOccurs="0"></element>
+			<element name="middleName" type="string" maxOccurs="1"
+				minOccurs="0"></element>
+			<element name="name" type="string" maxOccurs="1" minOccurs="0"></element>
+			<element name="titlePrefix" type="string" maxOccurs="1"
+				minOccurs="0"></element>
+			<element name="locks" type="tns:LockType"
+				maxOccurs="unbounded" minOccurs="0">
+			</element>
+		</sequence>
+	</complexType>
+
+	<element name="GetCustomerLocksServiceRequest" type="tns:GetCustomerLocksServiceRequestType"></element>
+
+	<complexType name="GetCustomerLocksServiceRequestType">
+		<sequence>
+			<element name="getCustomerLocksRQ" type="tns:GetCustomerLocksRQType"
+				minOccurs="1" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="GetCustomerLocksRQType">
+		<sequence>
+			<element name="phoneNumber" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+
+
+	<complexType name="LockType">
+		<sequence>
+			<element name="id" type="string"></element>
+			<element name="date" type="string"></element>
+			<element name="description" type="string"></element>	
+			<element name="typeLock" type="string"></element>		
+		</sequence>
+	</complexType>
+</schema>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.grupobancolombia.com/BandaDigital/services/UserServices" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.grupobancolombia.com/BandaDigital/services/UserServices">
+
+
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+    
+
+
+    <element name="UpdateProfileServiceRequest" type="tns:UpdateProfileServiceRequestType"></element>
+
+    <complexType name="UpdateProfileServiceRequestType">
+    	<sequence>
+    		<element name="updateProfileRQ" type="tns:UpdateProfileRQType"></element>
+    	</sequence>
+    </complexType>
+    
+    <element name="UpdateProfileServiceResponse" type="tns:UpdateProfileServiceResponseType"></element>
+
+    <complexType name="UpdateProfileServiceResponseType">
+    	<sequence>
+    		<element name="updateProfileRS" type="tns:updateProfileRSType"></element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="UpdateProfileRQType">
+    	<sequence>
+    		<element name="phoneNumber" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="email" type="string" minOccurs="0"
+    			maxOccurs="1">
+    		</element>
+    		<element name="nickName" type="string" minOccurs="0"
+    			maxOccurs="1">
+    		</element>
+    		<element name="typeId" type="string" minOccurs="0"
+    			maxOccurs="1">
+    		</element>
+    		<element name="idNumber" type="string" minOccurs="0"
+    			maxOccurs="1">
+    		</element>
+    		<element name="dateExpedition" type="string" minOccurs="0"
+    			maxOccurs="1">
+    		</element>
+    		<element name="name" type="string" minOccurs="0"
+    			maxOccurs="1">
+    		</element>
+    		<element name="middleName" type="string" minOccurs="0"
+    			maxOccurs="1">
+    		</element>
+    		<element name="firstName" type="string" minOccurs="0"
+    			maxOccurs="1">
+    		</element>
+    		<element name="lastName" type="string" minOccurs="0"
+    			maxOccurs="1">
+    		</element>
+    		<element name="deviceId" type="string" minOccurs="0" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="updateProfileRSType"></complexType>
+
+
+
+
+
+
+</schema>

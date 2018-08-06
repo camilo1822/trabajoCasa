@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.grupobancolombia.com/BandaDigital/services/AccountServices" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.grupobancolombia.com/BandaDigital/services/AccountServices">
+
+    <element name="CloseAccountServiceRequest" type="tns:CloseAccountServiceRequestType"></element>
+
+    <complexType name="CloseAccountServiceRequestType">
+    	<sequence>
+    		<element name="closeAccountRQ" type="tns:CloseAccountRQType"></element>
+    	</sequence>
+    </complexType>
+
+    <element name="CloseAccountServiceResponse" type="tns:CloseAccountServiceResponseType"></element>
+
+    <complexType name="CloseAccountServiceResponseType">
+    	<sequence>
+    		<element name="closeAccountRS" type="tns:CloseAccountRSType"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="CloseAccountRSType"></complexType>
+
+    <complexType name="CloseAccountRQType">
+    	<sequence>
+    		<element name="phoneNumber" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="softToken" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="phoneNumberDestination" type="string"
+    			minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="code" type="string" minOccurs="0" maxOccurs="1"></element>
+    		<element name="description" type="string" minOccurs="0" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</schema>
