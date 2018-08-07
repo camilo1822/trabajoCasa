@@ -138,6 +138,25 @@ public interface PromocionUsuarioJPAService {
      */
     public void persistPromocionRegla(PromocionRegla promocionRegla,
             EntityManager em) throws JPAException;
+    
+    /**
+     * Devuelve el id mayor de la tabla PROMOCION_OPERACION
+     * 
+     * @param em
+     * @return String
+     * @throws JPAException
+     */
+    public String getPromocionOperacionMaxId(EntityManager em) throws JPAException;
+    
+    /**
+     * Inserta un entity <code>PromocionOperacion</code> en Base de Datos.
+     * 
+     * @param promocionOperacion
+     * @param em
+     * @throws JPAException
+     */
+    public void persistPromocionOperacion(PromocionOperacion promocionOperacion,
+            EntityManager em) throws JPAException;
 
     /**
      * Metodo para obtener registro <code>PromocionOperacion</code> por region y

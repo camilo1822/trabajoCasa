@@ -19,6 +19,7 @@ public class ConstantJPA {
     public static final String ELIMINA_REGISTRO_PROMOCION_USUARIO = "PromocionUsuario.deletePromocionOperacionId";
     public static final String NAMED_QUERY_PROMOCION_USUARIO_GET_PROMOCION_USUARIO_LIMIT = "PromocionUsuario.getPromocionUsuarioLimit";
     public static final String NAMED_QUERY_PROMOCION_REGLA_GET_MAX_ID = "PromocionRegla.getMaxId";
+    public static final String NAMED_QUERY_PROMOCION_OPERACION_GET_MAX_ID = "PromocionOperacion.getMaxId";
     public static final String NAMED_QUERY_PROMOCION_REGLA_FIND_BY_SERVICE = "PromocionOperacion.findByService";
     public static final String ELIMINA_REGISTRO_PROMOCION_COMERCIO = "PromocionComercio.deletePromocionOperacionId";
     public static final String COUNT_PROMOCION_USUARIO_ROWS = "PromocionUsuario.countPromocionUsuarioRows";
@@ -92,6 +93,7 @@ public class ConstantJPA {
     public static final String COMMON_STRING_PERSIST_CATS_MIG_METHOD = ":persistCatsMig:";
     public static final String COMMON_STRING_PERSIST_PROMOCION_USUARIO = ":persistPromocionUsuario:";
     public static final String COMMON_STRING_PERSIST_PROMOCION_REGLA = ":persistPromocionRegla:";
+    public static final String COMMON_STRING_PERSIST_PROMOCION_OPERACION = ":persistPromocionOperacion:";
     public static final String METHOD_GET_PROMOTION_OPERATION_BY_SERVICE = ":getPromocionOperacionByService:";
     public static final String COMMON_STRING_PERSIST_PROMOCION_COMERCIO = ":persistPromocionComercio:";
     public static final String COMMON_STRING_METHOD_GET_PROMOCION_OPERACION = ":getPromocionOperacionById:";
@@ -101,6 +103,7 @@ public class ConstantJPA {
     public static final String COMMON_STRING_DELETE_PROMOCION_USUARIO = ":deleteAllPromocionUsuarioByPromocionOperacion:";
     public static final String COMMON_STRING_METHOD_GET_PROMOCION_USUARIO_SIZE = ":getPromocionUsuarioSize:";
     public static final String COMMON_STRING_METHOD_GET_PROMOCION_REGLA_MAX_ID = ":getPromocionReglaMaxId:";
+    public static final String COMMON_STRING_METHOD_GET_PROMOCION_OPERACION_MAX_ID = ":getPromocionOperacionMaxId:";
     public static final String COMMON_STRING_PROMOCIO_OPERACION_ID = "promocionOperacionId";
     public static final String COMMON_STRING_PROMOCIO_OPERACION = "promocionOperacion";
     public static final String COMMON_STRING_PROMOCION_USUARIO_FIND_ALL = "PromocionUsuario.findAll";
@@ -189,6 +192,7 @@ public class ConstantJPA {
                     "AND DIS.DISTANCE <= DIS.RADIUS AND PN.PAIS_ID = ?4 ORDER BY DIS.DISTANCE");
 
     public static final String NAMED_QUERY_PROMOCION_REGLA_GET_MAX_ID_QUERY = "SELECT MAX(e.promocionReglaId) FROM PromocionRegla e";
+    public static final String NAMED_QUERY_PROMOCION_OPERACION_GET_MAX_ID_QUERY = "SELECT MAX(e.promocionOperacionId) FROM PromocionOperacion e";
     public static final String NAMED_QUERY_PROMOCION_REGLA_FIND_BY_SERVICE_QUERY = "SELECT p FROM PromocionOperacion p WHERE p.servicio = :service and p.paisId = :paisId";
     public static final String COMMON_STRING_SERVICE_PARAMETER = "service";
     public static final String COMMON_STRING_REGION_PARAMETER = "paisId";

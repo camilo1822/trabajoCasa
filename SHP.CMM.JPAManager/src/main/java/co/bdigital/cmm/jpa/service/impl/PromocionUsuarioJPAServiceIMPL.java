@@ -338,4 +338,46 @@ public class PromocionUsuarioJPAServiceIMPL
 
     }
 
+    @Override
+    public String getPromocionOperacionMaxId(EntityManager em)
+            throws JPAException {
+
+        try {
+            Query query = em.createNamedQuery(
+                    ConstantJPA.NAMED_QUERY_PROMOCION_OPERACION_GET_MAX_ID);
+
+            return query.getSingleResult().toString();
+
+        } catch (NoResultException e) {
+            return null;
+        } catch (Exception e) {
+            throw new JPAException(EnumJPAException.DB_ERROR,
+                    JPAUtil.generateStringConcatenated(
+                            this.getClass().getName(),
+                            ConstantJPA.COMMON_STRING_METHOD_GET_PROMOCION_OPERACION_MAX_ID),
+                    e);
+        }
+
+    }
+
+    @Override
+    public void persistPromocionOperacion(PromocionOperacion promocionOperacion,
+            EntityManager em) throws JPAException {
+        try {
+            Date currentDate = new Date();
+            Timestamp time = new Timestamp(currentDate.getTime());
+            promocionOperacion.setFechaCreacion(time);
+            promocionOperacion
+                    .setUsrCreacion(ConstantJPA.COMMON_STRING_NEQUI_UPPER);
+            em.persist(promocionOperacion);
+
+        } catch (Exception e) {
+            throw new JPAException(EnumJPAException.DB_ERROR,
+                    JPAUtil.generateStringConcatenated(
+                            this.getClass().getName(),
+                            ConstantJPA.COMMON_STRING_PERSIST_PROMOCION_REGLA),
+                    e);
+        }
+    }
+
 }

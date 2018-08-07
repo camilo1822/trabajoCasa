@@ -15,7 +15,9 @@ import java.util.List;
  */
 @Entity
 @Table(name = ConstantJPA.COMMON_STRING_PROMOCION_OPERACION, schema = ConstantJPA.COMMON_STRING_SHBANCA_DIGITAL)
-@NamedQuery(name = ConstantJPA.NAMED_QUERY_PROMOCION_REGLA_FIND_BY_SERVICE, query = ConstantJPA.NAMED_QUERY_PROMOCION_REGLA_FIND_BY_SERVICE_QUERY)
+@NamedQueries({
+    @NamedQuery(name = ConstantJPA.NAMED_QUERY_PROMOCION_REGLA_FIND_BY_SERVICE, query = ConstantJPA.NAMED_QUERY_PROMOCION_REGLA_FIND_BY_SERVICE_QUERY),
+    @NamedQuery(name = ConstantJPA.NAMED_QUERY_PROMOCION_OPERACION_GET_MAX_ID, query = ConstantJPA.NAMED_QUERY_PROMOCION_OPERACION_GET_MAX_ID_QUERY) })
 public class PromocionOperacion implements Serializable {
     private static final long serialVersionUID = 1L;
 
